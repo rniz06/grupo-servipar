@@ -31,6 +31,7 @@ class Index extends Component
     {
         return view('livewire.admin.roles.index', [
             'roles' => Rol::select('id', 'name', 'created_at', 'updated_at')
+                ->where('name', 'NOT LIKE', 'SuperAdmin')
                 ->buscador($this->buscador)
                 ->paginate($this->paginado)
         ]);
@@ -39,6 +40,7 @@ class Index extends Component
     public function cargarDatosParaExpotar()
     {
         return Rol::select('name', 'created_at')
+            ->where('name', 'NOT LIKE', 'SuperAdmin')
             ->buscador($this->buscador)
             ->orderBy('name')
             ->get();
