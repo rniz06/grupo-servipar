@@ -22,4 +22,9 @@ class UsuarioController extends Controller
     {
         return view('admin.usuarios.edit', compact('usuario'));
     }
+
+    public function asignarRol($usuario)
+    {
+        return view('admin.usuarios.asignar-rol', compact('usuario'));
+    }
 }
