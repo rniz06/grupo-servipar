@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
@@ -10,5 +11,12 @@ Route::prefix('admin')->name('admin.')->middleware('role:SuperAdmin')->group(fun
         Route::get('/usuarios', 'index')->name('usuarios.index');
         Route::get('/usuarios/create', 'create')->name('usuarios.create');
         Route::get('/usuarios/{usuario}/edit', 'edit')->name('usuarios.edit');
+    });
+
+     // RUTAS DEL MODULO ROLES
+    Route::controller(RoleController::class)->group(function () {
+        Route::get('/roles', 'index')->name('roles.index');
+        Route::get('/roles/create', 'create')->name('roles.create');
+        Route::get('/roles/{role}/edit', 'edit')->name('roles.edit');
     });
 });
