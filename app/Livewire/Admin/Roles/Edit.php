@@ -9,8 +9,10 @@ use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
-class Create extends Component
+class Edit extends Component
 {
+    public $id;
+
     #[Validate]
     public $name, $permisos; // PROPIEDADES DEL FORMULARIO
 
@@ -18,13 +20,16 @@ class Create extends Component
 
     public function mount()
     {
-        $this->permisosParaSelect = Permiso::select('name')->where('name', 'NOT LIKE', 'SuperAdmin')->get();    
+        $rol = Rol::findOrFail($this->id);
+        $this->name = $rol->name;
+        $this->permisos = $rol->permissions->pluck('name')->toArray();
+        $this->permisosParaSelect = Permiso::select('name')->where('name', 'NOT LIKE', 'SuperAdmin')->get();
     }
 
     protected function rules()
     {
         return [
-            'name'        => ['required', 'string', 'max:45', Rule::unique(Rol::class)],
+            'name'        => ['required', 'string', 'max:45', Rule::unique(Rol::class)->ignore($this->id)],
             'permisos'    => ['required', 'array']
         ];
     }
@@ -32,19 +37,20 @@ class Create extends Component
     public function guardar()
     {
         $this->validate();
-        $rol = Rol::create([
+        $rol = Rol::findOrFail($this->id);
+        $rol->update([
             'name' => $this->name,
-            'creadoPor' => Auth::id(),
+            'actualizadoPor' => Auth::id(),
         ]);
-        // ASIGNAR LOS PERMISOS SELECCIONADOS AL ROL CREADO
+        // ASIGNAR LOS PERMISOS SELECCIONADOS AL ROL
         $rol->syncPermissions($this->permisos);
 
-        session()->flash('success', 'Rol Creado Correctamente!');
+        session()->flash('success', 'Rol Actualizado Correctamente!');
         $this->redirectRoute('admin.roles.index');
     }
 
     public function render()
     {
-        return view('livewire.admin.roles.create');
+        return view('livewire.admin.roles.edit');
     }
 }

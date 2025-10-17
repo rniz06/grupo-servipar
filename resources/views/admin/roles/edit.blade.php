@@ -9,7 +9,7 @@
 {{-- Content body: main page content --}}
 
 @section('content_body')
-    @livewire('admin.roles.edit', ['role' => $role])
+    @livewire('admin.roles.edit', ['id' => $role])
 
 @stop
 
