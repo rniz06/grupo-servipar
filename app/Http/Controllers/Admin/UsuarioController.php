@@ -18,6 +18,11 @@ class UsuarioController extends Controller
         return view('admin.usuarios.create');
     }
 
+    public function asignarRolAUsuario()
+    {
+        return view('admin.usuarios.asignar-rol-a-usuarios');
+    }
+
     public function edit($usuario)
     {
         return view('admin.usuarios.edit', compact('usuario'));

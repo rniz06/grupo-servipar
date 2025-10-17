@@ -5,6 +5,9 @@
         <x-slot name="headerBotones">
             <a href="{{ route('admin.usuarios.create') }}" class="btn btn-sm btn-success"><i
                     class="fas fa-user-plus"></i>Añadir Usuario</a>
+
+            <a href="{{ route('admin.usuarios.asignar-rol-a-usuarios') }}" class="btn btn-sm btn-outline-secondary"><i
+                    class="fas fa-user-tag"></i>Asig. Rol a Usuarios</a>
         </x-slot>
         <x-slot name="cabeceras">
             {{-- Name --}}
