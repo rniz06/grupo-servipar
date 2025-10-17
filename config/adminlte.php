@@ -325,6 +325,11 @@ return [
                     'route' => 'admin.usuarios.index',
                     'can' => 'SuperAdmin',
                 ],
+                [
+                    'text' => 'Roles',
+                    'route' => 'admin.roles.index',
+                    'can' => 'SuperAdmin',
+                ],
             ],
         ],
         // [

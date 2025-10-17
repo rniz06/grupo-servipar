@@ -28,3 +28,8 @@ body {
         .center {
             text-align: center;
         }
+
+        .sin-resultados {
+            text-align: center;
+            color: #6c757d !important;
+        }
