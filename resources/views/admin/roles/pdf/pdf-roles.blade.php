@@ -10,7 +10,7 @@
 
 
 @section('contenido')
-    <div class="subtitulo">Reporte de Usuarios</div>
+    <div class="subtitulo">Reporte de Roles</div>
 
     <table class="tabla">
         <thead class="tabla-thead">

@@ -1,49 +1,19 @@
-<!DOCTYPE html>
-<html lang="es">
+@extends('layouts.pdf.plantilla')
 
-<head>
-    <meta charset="UTF-8">
-    <title>{{ $nombre_archivo ?? 'Documento' }}</title>
-    <link rel="stylesheet" href="{{ public_path('css/pdf/pdf-general.css') }}">
-    {{-- <style>
-        body {
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            margin: 20px;
-        }
+@section('titulo', 'Usuarios')
 
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+{{-- @section('departamento', 'Central de Comunicaciones y Alarmas') --}}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
+{{-- Definimos los logos para este reporte --}}
+{{-- @section('logo_izq', public_path('img/logos/logo-especial.png'))
+    @section('logo_der', public_path('img/logos/logo-secundario.png')) --}}
 
-        th, td {
-            border: 1px solid #999;
-            padding: 4px 6px;
-            text-align: left;
-        }
 
-        th {
-            background-color: #e0e0e0;
-        }
+@section('contenido')
+    <div class="subtitulo">Reporte de Usuarios</div>
 
-        .center {
-            text-align: center;
-        }
-    </style> --}}
-</head>
-
-<body>
-    <h2>{{ $nombre_archivo ?? 'Documento' }}</h2>
-
-    <table>
-        <thead>
+    <table class="tabla">
+        <thead class="tabla-thead">
             <tr>
                 <th>Nombre</th>
                 <th>Usuario</th>
@@ -55,8 +25,9 @@
                 <th>Ultimo Acceso</th>
             </tr>
         </thead>
-        <tbody>
-            @foreach ($datos as $usuario)
+
+        <tbody class="tabla-tbody">
+            @forelse ($datos as $usuario)
                 <tr>
                     <td>{{ $usuario->name ?? 'S/D' }}</td>
                     <td>{{ $usuario->usuario ?? 'S/D' }}</td>
@@ -68,9 +39,14 @@
                     <td>{{ !empty($usuario->ultimo_acceso) ? date('d/m/Y H:i:s', strtotime($usuario->ultimo_acceso)) : 'S/D' }}
                     </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="100%" style="font-style: italic; text-align: center">SIN REGISTROS</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
-</body>
+@endsection
 
-</html>
+@push('styles')
+@endpush
