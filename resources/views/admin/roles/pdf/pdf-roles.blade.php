@@ -1,23 +1,26 @@
-<!DOCTYPE html>
-<html lang="es">
+@extends('layouts.pdf.plantilla')
 
-<head>
-    <meta charset="UTF-8">
-    <title>{{ $nombre_archivo ?? 'Documento' }}</title>
-    <link rel="stylesheet" href="{{ public_path('css/pdf/pdf-general.css') }}">
-</head>
+{{-- @section('titulo', 'TITULO') --}}
 
-<body>
-    <h2>{{ $nombre_archivo ?? 'Documento' }}</h2>
+{{-- @section('departamento', 'Central de Comunicaciones y Alarmas') --}}
 
-    <table>
-        <thead>
+{{-- Definimos los logos para este reporte --}}
+{{-- @section('logo_izq', public_path('img/logos/logo-especial.png'))
+    @section('logo_der', public_path('img/logos/logo-secundario.png')) --}}
+
+
+@section('contenido')
+    <div class="subtitulo">Reporte de Usuarios</div>
+
+    <table class="tabla">
+        <thead class="tabla-thead">
             <tr>
                 <th>Nombre</th>
                 <th>Creado El</th>
             </tr>
         </thead>
-        <tbody>
+
+        <tbody class="tabla-tbody">
             @forelse ($datos as $rol)
                 <tr>
                     <td>{{ $rol->name ?? 'S/D' }}</td>
@@ -26,11 +29,12 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="100%" class="sin-resultados">Sin resultados coincidentes...</td>
+                    <td colspan="100%" style="font-style: italic; text-align: center">SIN REGISTROS</td>
                 </tr>
             @endforelse
         </tbody>
     </table>
-</body>
+@endsection
 
-</html>
+@push('styles')
+@endpush
