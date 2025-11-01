@@ -14,21 +14,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        //User::factory(10)->create();
-
-        // User::factory()->create([
-        //     'name' => 'Administrador',
-        //     'usuario' => 'Administrador',
-        //     'email' => 'ronaldalexisniznunez@gmail.com',
-        //     'password' => Hash::make('Administrador'),
-        //     'activo'  => true,
-        //     'ultimo_acceso'  => now(),
-        // ]);
-
         $this->call([
             RolYPermisoSeeder::class,
-            //PostSeeder::class,
-            //CommentSeeder::class,
+            CiudadSeeder::class,
+            EmpresaSeeder::class,
+            SucursalSeeder::class,
+            ImpuestoSeeder::class,
+            SysModuloSeeder::class,
+            SysSubModuloSeeder::class,
+            DepartamentoSeeder::class,
+            DepositoSeeder::class,
         ]);
     }
 }

@@ -1,25 +1,32 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Productos;
 
-use App\Models\Compras\Compra;
+use App\Models\Empresa;
+use App\Models\Sucursal;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class Deposito extends Model implements Auditable
+class Stock extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable, SoftDeletes;
 
-    protected $table = 'DEPOSITOS';
+    protected $table = 'productos.PRO_STOCK';
 
-    protected $fillable = ['deposito', 'empresa_id', 'sucursal_id', 'creadoPor', 'actualizadoPor'];
+    protected $fillable = ['cantidad', 'minimo', 'maximo', 'producto_id', 'empresa_id', 'sucursal_id', 'creadoPor', 'actualizadoPor'];
 
     /*
     |---------------------------------------
     | RELACIONES DEL MODELO
     |---------------------------------------
     */
+
+    public function producto()
+    {
+        return $this->belongsTo(Producto::class, 'producto_id');
+    }
 
     public function empresa()
     {
@@ -29,11 +36,6 @@ class Deposito extends Model implements Auditable
     public function sucursal()
     {
         return $this->belongsTo(Sucursal::class, 'sucursal_id');
-    }
-
-    public function compras()
-    {
-        return $this->hasMany(Compra::class, 'deposito_id');
     }
 
     /*

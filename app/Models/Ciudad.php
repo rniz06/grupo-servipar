@@ -12,5 +12,20 @@ class Ciudad extends Model implements Auditable
 
     protected $table = 'CIUDADES';
 
-    protected $fillable = ['ciudad'];
+    protected $fillable = ['ciudad', 'creadoPor', 'actualizadoPor'];
+
+    /*
+    |---------------------------------------
+    | RELACIONES DE AUDITORIA DE LA TABLA
+    |---------------------------------------
+    */
+    public function creadoPor()
+    {
+        return $this->belongsTo(User::class, 'creadoPor');
+    }
+
+    public function actualizadoPor()
+    {
+        return $this->belongsTo(User::class, 'actualizadoPor');
+    }
 }

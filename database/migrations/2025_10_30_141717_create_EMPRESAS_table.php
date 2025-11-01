@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('correo', 50);
             $table->string('direccion', 100);
             $table->string('telefono', 20);
+            $table->foreignId('creadoPor')->nullable()->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('actualizadoPor')->nullable()->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Compras\Compra;
 use App\Models\Compras\Pedido;
+use App\Models\Productos\Stock;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -14,7 +15,7 @@ class Sucursal extends Model implements Auditable
 
     protected $table = 'SUCURSALES';
 
-    protected $fillable = ['sucursal', 'razon_social', 'ruc', 'correo', 'direccion', 'telefono', 'empresa_id'];
+    protected $fillable = ['sucursal', 'razon_social', 'ruc', 'correo', 'direccion', 'telefono', 'empresa_id', 'creadoPor', 'actualizadoPor'];
 
     /*
     |---------------------------------------
@@ -47,9 +48,29 @@ class Sucursal extends Model implements Auditable
         return $this->hasMany(Compra::class, 'sucursal_id');
     }
 
+    public function stock()
+    {
+        return $this->hasMany(Stock::class, 'sucursal_id');
+    }
+
     /*
     |---------------------------------------
     | FIN RELACIONES DEL MODELO
     |---------------------------------------
     */
+
+    /*
+    |---------------------------------------
+    | RELACIONES DE AUDITORIA DE LA TABLA
+    |---------------------------------------
+    */
+    public function creadoPor()
+    {
+        return $this->belongsTo(User::class, 'creadoPor');
+    }
+
+    public function actualizadoPor()
+    {
+        return $this->belongsTo(User::class, 'actualizadoPor');
+    }
 }

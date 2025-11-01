@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('impuesto', 100);
             $table->integer('porcentaje');
             $table->string('siglas', 15)->nullable();
+            $table->foreignId('creadoPor')->nullable()->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('actualizadoPor')->nullable()->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

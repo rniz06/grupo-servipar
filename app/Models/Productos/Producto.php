@@ -4,6 +4,7 @@ namespace App\Models\Productos;
 
 use App\Models\Compras\PedidoDetalle;
 use App\Models\Compras\PresupuestoDetalle;
+use App\Models\Impuesto;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -36,6 +37,31 @@ class Producto extends Model implements Auditable
     |---------------------------------------
     */
 
+    public function tipo()
+    {
+        return $this->belongsTo(Tipo::class, 'tipo_id');
+    }
+
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class, 'categoria_id');
+    }
+
+    public function marca()
+    {
+        return $this->belongsTo(Marca::class, 'marca_id');
+    }
+
+    public function unidad()
+    {
+        return $this->belongsTo(Unidad::class, 'unidad_id');
+    }
+
+    public function impuesto()
+    {
+        return $this->belongsTo(Impuesto::class, 'impuesto_id');
+    }
+
     public function pedidoDetalle()
     {
         return $this->hasMany(PedidoDetalle::class, 'producto_id');
@@ -44,6 +70,11 @@ class Producto extends Model implements Auditable
     public function presupuestoDetalle()
     {
         return $this->hasMany(PresupuestoDetalle::class, 'producto_id');
+    }
+
+    public function stock()
+    {
+        return $this->hasMany(Stock::class, 'producto_id');
     }
 
     /*

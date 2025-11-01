@@ -12,7 +12,7 @@ class Departamento extends Model implements Auditable
 
     protected $table = 'DEPARTAMENTOS';
 
-    protected $fillable = ['departamento', 'responsable_id', 'empresa_id', 'sucursal_id'];
+    protected $fillable = ['departamento', 'responsable_id', 'empresa_id', 'sucursal_id', 'creadoPor', 'actualizadoPor'];
 
     /*
     |---------------------------------------
@@ -40,4 +40,19 @@ class Departamento extends Model implements Auditable
     | FIN RELACIONES DEL MODELO
     |---------------------------------------
     */
+
+    /*
+    |---------------------------------------
+    | RELACIONES DE AUDITORIA DE LA TABLA
+    |---------------------------------------
+    */
+    public function creadoPor()
+    {
+        return $this->belongsTo(User::class, 'creadoPor');
+    }
+
+    public function actualizadoPor()
+    {
+        return $this->belongsTo(User::class, 'actualizadoPor');
+    }
 }

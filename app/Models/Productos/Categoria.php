@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Productos;
 
-use App\Models\Compras\Compra;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class Deposito extends Model implements Auditable
+class Categoria extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable, SoftDeletes;
 
-    protected $table = 'DEPOSITOS';
+    protected $table = 'productos.PRO_CATEGORIAS';
 
-    protected $fillable = ['deposito', 'empresa_id', 'sucursal_id', 'creadoPor', 'actualizadoPor'];
+    protected $fillable = ['categoria', 'creadoPor', 'actualizadoPor'];
 
     /*
     |---------------------------------------
@@ -21,19 +21,9 @@ class Deposito extends Model implements Auditable
     |---------------------------------------
     */
 
-    public function empresa()
+    public function productos()
     {
-        return $this->belongsTo(Empresa::class, 'empresa_id');
-    }
-
-    public function sucursal()
-    {
-        return $this->belongsTo(Sucursal::class, 'sucursal_id');
-    }
-
-    public function compras()
-    {
-        return $this->hasMany(Compra::class, 'deposito_id');
+        return $this->hasMany(Producto::class, 'categoria_id');
     }
 
     /*

@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('CIUDADES', function (Blueprint $table) {
             $table->id();
             $table->string('ciudad', 100);
+            $table->foreignId('creadoPor')->nullable()->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('actualizadoPor')->nullable()->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

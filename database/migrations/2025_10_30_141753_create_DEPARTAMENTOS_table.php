@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('DEPARTAMENTOS', function (Blueprint $table) {
             $table->id();
             $table->string('departamento', 100)->comment('DEPARTAMENTOS DE LA EMPRESA');
-            $table->foreignId('responsable_id')->comment('USUARIO RESPONSABLE DEL DPTO')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('empresa_id')->constrained('EMPRESAS')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('sucursal_id')->constrained('SUCURSALES')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('responsable_id')->nullable()->comment('USUARIO RESPONSABLE DEL DPTO')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('empresa_id')->nullable()->constrained('EMPRESAS')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('sucursal_id')->nullable()->constrained('SUCURSALES')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('creadoPor')->nullable()->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('actualizadoPor')->nullable()->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

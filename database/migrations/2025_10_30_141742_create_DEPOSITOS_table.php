@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('DEPOSITOS', function (Blueprint $table) {
             $table->id();
-            $table->string('deposito');
+            $table->string('deposito', 75);
             $table->foreignId('empresa_id')->constrained('EMPRESAS')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('sucursal_id')->constrained('SUCURSALES')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('creadoPor')->nullable()->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('actualizadoPor')->nullable()->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });
