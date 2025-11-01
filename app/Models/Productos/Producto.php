@@ -2,6 +2,8 @@
 
 namespace App\Models\Productos;
 
+use App\Models\Compras\PedidoDetalle;
+use App\Models\Compras\PresupuestoDetalle;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -27,4 +29,26 @@ class Producto extends Model implements Auditable
         'creadoPor',
         'actualizadoPor'
     ];
+
+    /*
+    |---------------------------------------
+    | RELACIONES DEL MODELO
+    |---------------------------------------
+    */
+
+    public function pedidoDetalle()
+    {
+        return $this->hasMany(PedidoDetalle::class, 'producto_id');
+    }
+
+    public function presupuestoDetalle()
+    {
+        return $this->hasMany(PresupuestoDetalle::class, 'producto_id');
+    }
+
+    /*
+    |---------------------------------------
+    | FIN RELACIONES DEL MODELO
+    |---------------------------------------
+    */
 }
