@@ -1,6 +1,6 @@
 <div class="card">
-    <div class="card-header">
-        <h3 class="card-title mb-2 mb-md-0">{{ $titulo ?? '' }}
+    <div class="card-header text-sm">
+        <h3 class="card-title mb-2 mb-md-0 ">{{ $titulo ?? '' }}
             {{-- Botones exportación --}}
             @if ($excel)
                 <button class="btn btn-sm btn-outline-success mr-1" wire:click="{{ $excel }}">

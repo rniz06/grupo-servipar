@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
             SysSubModuloSeeder::class,
             DepartamentoSeeder::class,
             DepositoSeeder::class,
+            ProductoCategoriaSeeder::class,
+            ProductoSeeder::class
         ]);
     }
 }

@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('direccion', 100);
             $table->string('telefono', 20);
             $table->foreignId('ciudad_id')->constrained('public.CIUDADES')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('creadoPor')->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('actualizadoPor')->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('creadoPor')->nullable()->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('actualizadoPor')->nullable()->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

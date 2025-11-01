@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('productos.PRO_PRODUCTOS', function (Blueprint $table) {
             $table->id();
             $table->string('nombre', 100);
-            $table->string('codigo_barra');
+            $table->string('codigo_barra')->nullable();
             $table->integer('precio')->nullable();
             $table->string('descripcion')->nullable();
             $table->date('fecha_vencimiento')->nullable();
@@ -24,8 +24,8 @@ return new class extends Migration
             $table->foreignId('marca_id')->nullable()->constrained('productos.PRO_MARCAS')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('unidad_id')->nullable()->constrained('productos.PRO_UNIDADES')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('impuesto_id')->nullable()->constrained('public.IMPUESTOS')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('creadoPor')->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('actualizadoPor')->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('creadoPor')->nullable()->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('actualizadoPor')->nullable()->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

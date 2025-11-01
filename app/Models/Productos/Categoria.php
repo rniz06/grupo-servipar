@@ -13,7 +13,7 @@ class Categoria extends Model implements Auditable
 
     protected $table = 'productos.PRO_CATEGORIAS';
 
-    protected $fillable = ['categoria', 'creadoPor', 'actualizadoPor'];
+    protected $fillable = ['categoria', 'nivel', 'descripcion', 'creadoPor', 'actualizadoPor'];
 
     /*
     |---------------------------------------
