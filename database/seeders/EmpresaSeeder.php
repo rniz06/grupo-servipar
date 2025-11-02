@@ -20,7 +20,7 @@ class EmpresaSeeder extends Seeder
             'correo' => 'info@servipar.com',
             'direccion' => 'Teniente Aguirre 1237 esq. Coronel Rivarola y Facundo Machain, Asunción, Paraguay',
             'telefono' => '021 502 292',
-            'creadoPor' => 1 //ADMINISTRADOR
+            'creado_por' => 1 //ADMINISTRADOR
         ]);
     }
 }

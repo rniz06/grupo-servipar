@@ -269,7 +269,7 @@ class CiudadSeeder extends Seeder
         foreach ($ciudades as $ciudad) {
             Ciudad::create([
                 'ciudad' => $ciudad,
-                'creadoPor' => 1 //ADMINISTRADOR
+                'creado_por' => 1 //ADMINISTRADOR
             ]);
         }
     }

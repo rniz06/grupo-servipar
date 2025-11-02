@@ -17,28 +17,28 @@ class ImpuestoSeeder extends Seeder
             'impuesto' => 'SIN ESPECIFICAR',
             'porcentaje' => 0,
             'siglas' => 'SIN ESPECIFICAR',
-            'creadoPor' => 1 //ADMINISTRADOR
+            'creado_por' => 1 //ADMINISTRADOR
         ]);
 
         Impuesto::create([
             'impuesto' => 'IVA 10%',
             'porcentaje' => 10,
             'siglas' => 'IVA',
-            'creadoPor' => 1 //ADMINISTRADOR
+            'creado_por' => 1 //ADMINISTRADOR
         ]);
 
         Impuesto::create([
             'impuesto' => 'IVA 5%',
             'porcentaje' => 5,
             'siglas' => '',
-            'creadoPor' => 1 //ADMINISTRADOR
+            'creado_por' => 1 //ADMINISTRADOR
         ]);
 
         Impuesto::create([
             'impuesto' => 'EXCENTA',
             'porcentaje' => 0,
             'siglas' => 'EXCENTA',
-            'creadoPor' => 1 //ADMINISTRADOR
+            'creado_por' => 1 //ADMINISTRADOR
         ]);
     }
 }

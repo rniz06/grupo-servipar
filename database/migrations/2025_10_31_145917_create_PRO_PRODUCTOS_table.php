@@ -24,8 +24,8 @@ return new class extends Migration
             $table->foreignId('marca_id')->nullable()->constrained('productos.PRO_MARCAS')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('unidad_id')->nullable()->constrained('productos.PRO_UNIDADES')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('impuesto_id')->nullable()->constrained('public.IMPUESTOS')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('creadoPor')->nullable()->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('actualizadoPor')->nullable()->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('creado_por')->nullable()->references('id')->on('public.users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('actualizado_por')->nullable()->references('id')->on('public.users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

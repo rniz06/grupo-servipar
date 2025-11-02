@@ -13,7 +13,7 @@ class Marca extends Model implements Auditable
 
     protected $table = 'productos.PRO_MARCAS';
 
-    protected $fillable = ['marca', 'creadoPor', 'actualizadoPor'];
+    protected $fillable = ['marca', 'creado_por', 'actualizado_por'];
 
     /*
     |---------------------------------------
@@ -39,11 +39,11 @@ class Marca extends Model implements Auditable
     */
     public function creadoPor()
     {
-        return $this->belongsTo(User::class, 'creadoPor');
+        return $this->belongsTo(User::class, 'creado_por');
     }
 
     public function actualizadoPor()
     {
-        return $this->belongsTo(User::class, 'actualizadoPor');
+        return $this->belongsTo(User::class, 'actualizado_por');
     }
 }

@@ -14,7 +14,7 @@ class PedidoDetalle extends Model implements Auditable
 
     protected $table = 'compras.COM_PEDIDOS_DETALLES';
 
-    protected $fillable = ['cantidad', 'producto_id', 'pedido_id', 'creadoPor', 'actualizadoPor'];
+    protected $fillable = ['cantidad', 'producto_id', 'pedido_id', 'creado_por', 'actualizado_por'];
 
     /*
     |---------------------------------------
@@ -45,11 +45,11 @@ class PedidoDetalle extends Model implements Auditable
     */
     public function creadoPor()
     {
-        return $this->belongsTo(User::class, 'creadoPor');
+        return $this->belongsTo(User::class, 'creado_por');
     }
 
     public function actualizadoPor()
     {
-        return $this->belongsTo(User::class, 'actualizadoPor');
+        return $this->belongsTo(User::class, 'actualizado_por');
     }
 }

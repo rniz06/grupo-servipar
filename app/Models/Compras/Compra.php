@@ -17,7 +17,7 @@ class Compra extends Model implements Auditable
 
     protected $table = 'compras.COM_COMPRAS';
 
-    protected $fillable = ['fecha', 'nro_factura', 'total_pagado', 'estado', 'pedido_id', 'presupuesto_id', 'empresa_id', 'sucursal_id', 'deposito_id', 'creadoPor', 'actualizadoPor'];
+    protected $fillable = ['fecha', 'nro_factura', 'total_pagado', 'estado', 'pedido_id', 'presupuesto_id', 'empresa_id', 'sucursal_id', 'deposito_id', 'creado_por', 'actualizado_por'];
 
     /*
     |---------------------------------------
@@ -71,11 +71,11 @@ class Compra extends Model implements Auditable
     */
     public function creadoPor()
     {
-        return $this->belongsTo(User::class, 'creadoPor');
+        return $this->belongsTo(User::class, 'creado_por');
     }
 
     public function actualizadoPor()
     {
-        return $this->belongsTo(User::class, 'actualizadoPor');
+        return $this->belongsTo(User::class, 'actualizado_por');
     }
 }

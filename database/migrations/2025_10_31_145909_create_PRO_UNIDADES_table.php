@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('productos.PRO_UNIDADES', function (Blueprint $table) {
             $table->id();
             $table->string('unidad', 45);
-            $table->foreignId('creadoPor')->nullable()->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('actualizadoPor')->nullable()->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('creado_por')->nullable()->references('id')->on('public.users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('actualizado_por')->nullable()->references('id')->on('public.users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

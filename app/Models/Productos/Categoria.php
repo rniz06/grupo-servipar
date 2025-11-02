@@ -13,7 +13,7 @@ class Categoria extends Model implements Auditable
 
     protected $table = 'productos.PRO_CATEGORIAS';
 
-    protected $fillable = ['categoria', 'nivel', 'descripcion', 'creadoPor', 'actualizadoPor'];
+    protected $fillable = ['categoria', 'nivel', 'descripcion', 'creado_por', 'actualizado_por'];
 
     /*
     |---------------------------------------
@@ -39,11 +39,11 @@ class Categoria extends Model implements Auditable
     */
     public function creadoPor()
     {
-        return $this->belongsTo(User::class, 'creadoPor');
+        return $this->belongsTo(User::class, 'creado_por');
     }
 
     public function actualizadoPor()
     {
-        return $this->belongsTo(User::class, 'actualizadoPor');
+        return $this->belongsTo(User::class, 'actualizado_por');
     }
 }

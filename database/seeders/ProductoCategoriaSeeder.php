@@ -32,7 +32,7 @@ class ProductoCategoriaSeeder extends Seeder
             Categoria::create([
                 'categoria' => $categoria['categoria'],
                 'nivel'     => $categoria['nivel'],
-                'creadoPor' => 1, // USUARIO: ADMINISTRADOR
+                'creado_por' => 1, // USUARIO: ADMINISTRADOR
             ]);
         }
     }

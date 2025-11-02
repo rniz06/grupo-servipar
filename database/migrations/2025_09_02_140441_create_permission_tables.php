@@ -25,8 +25,8 @@ return new class extends Migration
             $table->bigIncrements('id'); // permission id
             $table->string('name');       // For MyISAM use string('name', 225); // (or 166 for InnoDB with Redundant/Compact row format)
             $table->string('guard_name'); // For MyISAM use string('guard_name', 25);
-            $table->foreignId('creadoPor')->nullable()->constrained('public.users')->cascadeOnUpdate()->onDelete('set null');
-            $table->foreignId('actualizadoPor')->nullable()->constrained('public.users')->cascadeOnUpdate()->onDelete('set null');
+            $table->foreignId('creado_por')->nullable()->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('actualizado_por')->nullable()->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
 
             $table->unique(['name', 'guard_name']);
@@ -41,8 +41,8 @@ return new class extends Migration
             }
             $table->string('name');       // For MyISAM use string('name', 225); // (or 166 for InnoDB with Redundant/Compact row format)
             $table->string('guard_name'); // For MyISAM use string('guard_name', 25);
-            $table->foreignId('creadoPor')->nullable()->constrained('public.users')->cascadeOnUpdate()->onDelete('set null');
-            $table->foreignId('actualizadoPor')->nullable()->constrained('public.users')->cascadeOnUpdate()->onDelete('set null');
+            $table->foreignId('creado_por')->nullable()->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('actualizado_por')->nullable()->constrained('public.users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
             if ($teams || config('permission.testing')) {

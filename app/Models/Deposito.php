@@ -13,7 +13,7 @@ class Deposito extends Model implements Auditable
 
     protected $table = 'DEPOSITOS';
 
-    protected $fillable = ['deposito', 'empresa_id', 'sucursal_id', 'creadoPor', 'actualizadoPor'];
+    protected $fillable = ['deposito', 'empresa_id', 'sucursal_id', 'creado_por', 'actualizado_por'];
 
     /*
     |---------------------------------------
@@ -49,11 +49,11 @@ class Deposito extends Model implements Auditable
     */
     public function creadoPor()
     {
-        return $this->belongsTo(User::class, 'creadoPor');
+        return $this->belongsTo(User::class, 'creado_por');
     }
 
     public function actualizadoPor()
     {
-        return $this->belongsTo(User::class, 'actualizadoPor');
+        return $this->belongsTo(User::class, 'actualizado_por');
     }
 }

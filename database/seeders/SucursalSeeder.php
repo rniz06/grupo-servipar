@@ -21,7 +21,7 @@ class SucursalSeeder extends Seeder
             'direccion' => 'Teniente Aguirre 1237 esq. Coronel Rivarola y Facundo Machain, Asunción, Paraguay',
             'telefono' => '021 502 292',
             'empresa_id' => 1,
-            'creadoPor' => 1 //ADMINISTRADOR
+            'creado_por' => 1 //ADMINISTRADOR
         ]);
     }
 }

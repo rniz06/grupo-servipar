@@ -17,7 +17,7 @@ class DepositoSeeder extends Seeder
             'deposito' => 'DEPOSITO 1',
             'empresa_id' => 1,
             'sucursal_id' => 1,
-            'creadoPor' => 1 //ADMINISTRADOR
+            'creado_por' => 1 //ADMINISTRADOR
         ]);
     }
 }

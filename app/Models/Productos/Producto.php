@@ -5,6 +5,7 @@ namespace App\Models\Productos;
 use App\Models\Compras\PedidoDetalle;
 use App\Models\Compras\PresupuestoDetalle;
 use App\Models\Impuesto;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -27,8 +28,8 @@ class Producto extends Model implements Auditable
         'marca_id',
         'unidad_id',
         'impuesto_id',
-        'creadoPor',
-        'actualizadoPor'
+        'creado_por',
+        'actualizado_por'
     ];
 
     /*
@@ -82,4 +83,19 @@ class Producto extends Model implements Auditable
     | FIN RELACIONES DEL MODELO
     |---------------------------------------
     */
+
+    /*
+    |---------------------------------------
+    | RELACIONES DE AUDITORIA DE LA TABLA
+    |---------------------------------------
+    */
+    public function creadoPor()
+    {
+        return $this->belongsTo(User::class, 'creado_por');
+    }
+
+    public function actualizadoPor()
+    {
+        return $this->belongsTo(User::class, 'actualizado_por');
+    }
 }

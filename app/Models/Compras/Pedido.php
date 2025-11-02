@@ -3,6 +3,7 @@
 namespace App\Models\Compras;
 
 use App\Enums\Compras\PedidoEstado;
+use App\Models\Departamento;
 use App\Models\Empresa;
 use App\Models\Sucursal;
 use App\Models\User;
@@ -16,13 +17,18 @@ class Pedido extends Model implements Auditable
 
     protected $table = 'compras.COM_PEDIDOS';
 
-    protected $fillable = ['fecha_pedido', 'fecha_entrega', 'estado', 'empresa_id', 'sucursal_id', 'creadoPor', 'actualizadoPor'];
+    protected $fillable = ['fecha_pedido', 'fecha_entrega', 'estado', 'departamento_id', 'empresa_id', 'sucursal_id', 'creado_por', 'actualizado_por'];
 
     /*
     |---------------------------------------
     | RELACIONES DEL MODELO
     |---------------------------------------
     */
+
+    public function departamento()
+    {
+        return $this->belongsTo(Departamento::class, 'departamento_id');
+    }
 
     public function empresa()
     {
@@ -76,11 +82,11 @@ class Pedido extends Model implements Auditable
     */
     public function creadoPor()
     {
-        return $this->belongsTo(User::class, 'creadoPor');
+        return $this->belongsTo(User::class, 'creado_por');
     }
 
     public function actualizadoPor()
     {
-        return $this->belongsTo(User::class, 'actualizadoPor');
+        return $this->belongsTo(User::class, 'actualizado_por');
     }
 }

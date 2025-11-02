@@ -13,7 +13,7 @@ class Unidad extends Model implements Auditable
 
     protected $table = 'productos.PRO_UNIDADES';
 
-    protected $fillable = ['unidad', 'creadoPor', 'actualizadoPor'];
+    protected $fillable = ['unidad', 'creado_por', 'actualizado_por'];
 
     /*
     |---------------------------------------
@@ -39,11 +39,11 @@ class Unidad extends Model implements Auditable
     */
     public function creadoPor()
     {
-        return $this->belongsTo(User::class, 'creadoPor');
+        return $this->belongsTo(User::class, 'creado_por');
     }
 
     public function actualizadoPor()
     {
-        return $this->belongsTo(User::class, 'actualizadoPor');
+        return $this->belongsTo(User::class, 'actualizado_por');
     }
 }

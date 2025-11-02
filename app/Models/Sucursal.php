@@ -15,7 +15,7 @@ class Sucursal extends Model implements Auditable
 
     protected $table = 'SUCURSALES';
 
-    protected $fillable = ['sucursal', 'razon_social', 'ruc', 'correo', 'direccion', 'telefono', 'empresa_id', 'creadoPor', 'actualizadoPor'];
+    protected $fillable = ['sucursal', 'razon_social', 'ruc', 'correo', 'direccion', 'telefono', 'empresa_id', 'creado_por', 'actualizado_por'];
 
     /*
     |---------------------------------------
@@ -66,11 +66,11 @@ class Sucursal extends Model implements Auditable
     */
     public function creadoPor()
     {
-        return $this->belongsTo(User::class, 'creadoPor');
+        return $this->belongsTo(User::class, 'creado_por');
     }
 
     public function actualizadoPor()
     {
-        return $this->belongsTo(User::class, 'actualizadoPor');
+        return $this->belongsTo(User::class, 'actualizado_por');
     }
 }

@@ -13,7 +13,7 @@ class Proveedor extends Model implements Auditable
 
     protected $table = 'compras.COM_PROVEEDORES';
 
-    protected $fillable = ['razon_social', 'ruc', 'correo', 'direccion', 'telefono', 'ciudad_id', 'creadoPor', 'actualizadoPor'];
+    protected $fillable = ['razon_social', 'ruc', 'correo', 'direccion', 'telefono', 'ciudad_id', 'creado_por', 'actualizado_por'];
 
     /*
     |---------------------------------------
@@ -22,11 +22,11 @@ class Proveedor extends Model implements Auditable
     */
     public function creadoPor()
     {
-        return $this->belongsTo(User::class, 'creadoPor');
+        return $this->belongsTo(User::class, 'creado_por');
     }
 
     public function actualizadoPor()
     {
-        return $this->belongsTo(User::class, 'actualizadoPor');
+        return $this->belongsTo(User::class, 'actualizado_por');
     }
 }

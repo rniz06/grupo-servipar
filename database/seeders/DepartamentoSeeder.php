@@ -18,7 +18,7 @@ class DepartamentoSeeder extends Seeder
             'empresa_id' => 1,
             'sucursal_id' => 1,
             'responsable_id' => 1,
-            'creadoPor' => 1 //ADMINISTRADOR
+            'creado_por' => 1 //ADMINISTRADOR
         ]);
 
         Departamento::create([
@@ -26,7 +26,7 @@ class DepartamentoSeeder extends Seeder
             'empresa_id' => 1,
             'sucursal_id' => 1,
             'responsable_id' => 1,
-            'creadoPor' => 1 //ADMINISTRADOR
+            'creado_por' => 1 //ADMINISTRADOR
         ]);
     }
 }

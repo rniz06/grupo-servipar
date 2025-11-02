@@ -15,7 +15,7 @@ class Stock extends Model implements Auditable
 
     protected $table = 'productos.PRO_STOCK';
 
-    protected $fillable = ['cantidad', 'minimo', 'maximo', 'producto_id', 'empresa_id', 'sucursal_id', 'creadoPor', 'actualizadoPor'];
+    protected $fillable = ['cantidad', 'minimo', 'maximo', 'producto_id', 'empresa_id', 'sucursal_id', 'creado_por', 'actualizado_por'];
 
     /*
     |---------------------------------------
@@ -51,11 +51,11 @@ class Stock extends Model implements Auditable
     */
     public function creadoPor()
     {
-        return $this->belongsTo(User::class, 'creadoPor');
+        return $this->belongsTo(User::class, 'creado_por');
     }
 
     public function actualizadoPor()
     {
-        return $this->belongsTo(User::class, 'actualizadoPor');
+        return $this->belongsTo(User::class, 'actualizado_por');
     }
 }

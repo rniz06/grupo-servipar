@@ -19,7 +19,7 @@ class ProductoSeeder extends Seeder
     {
         Marca::create([
             'marca' => 'SIN ESPECIFICAR',
-            'creadoPor' => 1, // USUARIO: ADMINISTRADOR
+            'creado_por' => 1, // USUARIO: ADMINISTRADOR
         ]);
 
         $tipos = ['ESTANDAR', 'SERVICIO', 'FISICO', 'DIGITAL'];
@@ -27,7 +27,7 @@ class ProductoSeeder extends Seeder
         foreach ($tipos as $tipo) {
             Tipo::create([
                 'tipo' => $tipo,
-                'creadoPor' => 1, // USUARIO: ADMINISTRADOR
+                'creado_por' => 1, // USUARIO: ADMINISTRADOR
             ]);
         }
 
@@ -36,7 +36,7 @@ class ProductoSeeder extends Seeder
         foreach ($unidades as $unidad) {
             Unidad::create([
                 'unidad' => $unidad,
-                'creadoPor' => 1, // USUARIO: ADMINISTRADOR
+                'creado_por' => 1, // USUARIO: ADMINISTRADOR
             ]);
         }
 
@@ -119,7 +119,7 @@ class ProductoSeeder extends Seeder
                 'marca_id' => 1,
                 'unidad_id' => 1,
                 'impuesto_id' => 1,
-                'creadoPor' => 1, // USUARIO: ADMINISTRADOR
+                'creado_por' => 1, // USUARIO: ADMINISTRADOR
             ]);
         }
     }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Compras\Pedido;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -12,7 +13,7 @@ class Departamento extends Model implements Auditable
 
     protected $table = 'DEPARTAMENTOS';
 
-    protected $fillable = ['departamento', 'responsable_id', 'empresa_id', 'sucursal_id', 'creadoPor', 'actualizadoPor'];
+    protected $fillable = ['departamento', 'responsable_id', 'empresa_id', 'sucursal_id', 'creado_por', 'actualizado_por'];
 
     /*
     |---------------------------------------
@@ -35,6 +36,11 @@ class Departamento extends Model implements Auditable
         return $this->belongsTo(Sucursal::class, 'sucursal_id');
     }
 
+    public function pedidos()
+    {
+        return $this->hasMany(Pedido::class, 'departamento_id');
+    }
+
     /*
     |---------------------------------------
     | FIN RELACIONES DEL MODELO
@@ -48,11 +54,11 @@ class Departamento extends Model implements Auditable
     */
     public function creadoPor()
     {
-        return $this->belongsTo(User::class, 'creadoPor');
+        return $this->belongsTo(User::class, 'creado_por');
     }
 
     public function actualizadoPor()
     {
-        return $this->belongsTo(User::class, 'actualizadoPor');
+        return $this->belongsTo(User::class, 'actualizado_por');
     }
 }

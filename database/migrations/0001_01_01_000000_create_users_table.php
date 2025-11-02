@@ -25,8 +25,8 @@ return new class extends Migration
             $table->dateTime('ultimo_acceso')->nullable();
             $table->rememberToken();
             $table->timestamps();
-            $table->foreignId('creadoPor')->nullable()->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete('set null');
-            $table->foreignId('actualizadoPor')->nullable()->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete('set null');
+            $table->foreignId('creado_por')->nullable()->references('id')->on('public.users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('actualizado_por')->nullable()->references('id')->on('public.users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->softDeletes();
         });
 
