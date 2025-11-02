@@ -29,11 +29,12 @@ class Index extends Component
 
     public function render()
     {
-        // $x = Pedido::with('creadoPor')->find(1);
-        // return dd($x);
         return view('livewire.compras.pedidos.index', [
-            'pedidos' => Pedido::select('id', 'fecha_pedido', 'fecha_entrega', 'estado', 'departamento_id', 'sucursal_id', 'creado_por')
-                ->with(['departamento:id,departamento', 'sucursal:id,sucursal', 'creadoPor:id,name'])
+            'pedidos' => Pedido::select('id', 'fecha_pedido', 'fecha_entrega', 'estado', 'departamento_id', 'sucursal_id', 'pedido_por')
+                ->buscarFechaPedido($this->buscarFechaPedido)
+                ->buscarFechaEntrega($this->buscarFechaEntrega)
+                ->buscarEstado($this->buscarEstado)
+                ->with(['departamento:id,departamento', 'sucursal:id,sucursal', 'pedidoPor:id,name'])
                 ->paginate($this->paginado)
         ]);
     }

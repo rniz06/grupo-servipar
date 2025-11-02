@@ -68,7 +68,7 @@
                 <td>{{ $pedido->estado ?? 'S/D' }}</td>
                 <td>{{ $pedido->departamento->departamento ?? 'S/D' }}</td>
                 <td>{{ $pedido->sucursal->sucursal ?? 'S/D' }}</td>
-                <td>{{ $pedido->creadoPor->name ?? 'S/D' }}</td>
+                <td>{{ $pedido->pedidoPor->name ?? 'S/D' }}</td>
                 <td>
                     {{-- <a href="{{ route('admin.roles.edit', $rol->id) }}" class="btn btn-sm btn-warning"><i
                             class="fas fa-edit mr-1"></i>Editar</a> --}}

@@ -7,6 +7,8 @@ use App\Models\Departamento;
 use App\Models\Empresa;
 use App\Models\Sucursal;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -17,13 +19,18 @@ class Pedido extends Model implements Auditable
 
     protected $table = 'compras.COM_PEDIDOS';
 
-    protected $fillable = ['fecha_pedido', 'fecha_entrega', 'estado', 'departamento_id', 'empresa_id', 'sucursal_id', 'creado_por', 'actualizado_por'];
+    protected $fillable = ['fecha_pedido', 'fecha_entrega', 'estado', 'pedido_por', 'departamento_id', 'empresa_id', 'sucursal_id', 'creado_por', 'actualizado_por'];
 
     /*
     |---------------------------------------
     | RELACIONES DEL MODELO
     |---------------------------------------
     */
+
+    public function pedidoPor()
+    {
+        return $this->belongsTo(User::class, 'pedido_por');
+    }
 
     public function departamento()
     {
@@ -74,6 +81,84 @@ class Pedido extends Model implements Auditable
             'estado'        => PedidoEstado::class
         ];
     }
+
+    /*
+    |---------------------------------------
+    | LOCAL SCOPE / FILTROS DE CONSULTAS
+    |---------------------------------------
+    */
+
+    /**
+     * Busqueda por campo fecha_pedido.
+     */
+    #[Scope]
+    protected function buscarFechaPedido(Builder $query, $search = null): void
+    {
+        $query->when($search, function (Builder $query, string $search) {
+            $query->whereDate('fecha_pedido', $search);
+        });
+    }
+
+    /**
+     * Busqueda por campo fecha_entrega.
+     */
+    #[Scope]
+    protected function buscarFechaEntrega(Builder $query, $search = null): void
+    {
+        $query->when($search, function (Builder $query, string $search) {
+            $query->whereDate('fecha_entrega', $search);
+        });
+    }
+
+    /**
+     * Busqueda por campo estado.
+     */
+    #[Scope]
+    protected function buscarEstado(Builder $query, $search = null): void
+    {
+        $query->when($search, function (Builder $query, string $search) {
+            $query->where('estado', $search);
+        });
+    }
+
+    /**
+     * Busqueda por campo departamento_id.
+     */
+    #[Scope]
+    protected function buscarDepartamentoId(Builder $query, $search = null): void
+    {
+        $query->when($search, function (Builder $query, string $search) {
+            $query->where('departamento_id', $search);
+        });
+    }
+
+    /**
+     * Busqueda por campo empresa_id.
+     */
+    #[Scope]
+    protected function buscarEmpresaId(Builder $query, $search = null): void
+    {
+        $query->when($search, function (Builder $query, string $search) {
+            $query->where('empresa_id', $search);
+        });
+    }
+
+    /**
+     * Busqueda por campo sucursal_id.
+     */
+    #[Scope]
+    protected function buscarSucursalId(Builder $query, $search = null): void
+    {
+        $query->when($search, function (Builder $query, string $search) {
+            $query->where('sucursal_id', $search);
+        });
+    }
+
+    /*
+    |---------------------------------------
+    | FIN LOCAL SCOPE / FILTROS DE CONSULTAS
+    |---------------------------------------
+    */
 
     /*
     |---------------------------------------
