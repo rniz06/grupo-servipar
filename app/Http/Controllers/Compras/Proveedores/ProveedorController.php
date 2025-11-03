@@ -15,6 +15,7 @@ class ProveedorController extends Controller
     {
         $this->middleware('permission:Proveedores Listar', ['only' => ['index']]);
         $this->middleware('permission:Proveedores Crear', ['only' => ['create']]);
+        $this->middleware('permission:Proveedores Editar', ['only' => ['edit']]);
     }
 
     public function index()
@@ -25,5 +26,10 @@ class ProveedorController extends Controller
     public function create()
     {
         return view('compras.proveedores.create');
+    }
+
+    public function edit($proveedor)
+    {
+        return view('compras.proveedores.edit', compact('proveedor'));
     }
 }

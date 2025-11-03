@@ -42,7 +42,7 @@ class Index extends Component
     public function render()
     {
         return view('livewire.compras.proveedores.index', [
-            'proveedores' => Proveedor::select('razon_social', 'ruc', 'correo', 'direccion', 'telefono', 'ciudad_id')
+            'proveedores' => Proveedor::select('id', 'razon_social', 'ruc', 'correo', 'direccion', 'telefono', 'ciudad_id')
                 ->buscarRazonsocial($this->buscarRazonsocial)
                 ->buscarRuc($this->buscarRuc)
                 ->buscarCorreo($this->buscarCorreo)

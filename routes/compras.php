@@ -18,5 +18,6 @@ Route::prefix('compras')->name('compras.')->middleware('auth')->group(function (
     Route::controller(ProveedorController::class)->prefix('proveedores')->name('proveedores.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
+        Route::get('/{proveedor}/edit', 'edit')->name('edit');
     });
 });

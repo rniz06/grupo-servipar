@@ -62,10 +62,8 @@
                 <td>{{ $proveedor->telefono ?? 'S/D' }}</td>
                 <td>{{ $proveedor->ciudad->ciudad ?? 'S/D' }}</td>
                 <td>
-                    {{-- <a href="{{ route('admin.roles.edit', $rol->id) }}" class="btn btn-sm btn-warning"><i
-                            class="fas fa-edit mr-1"></i>Editar</a> --}}
-
-                    <button class="btn btn-sm btn-warning">Editar</button>
+                    <a href="{{ route('compras.proveedores.edit', $proveedor->id) }}" class="btn btn-sm btn-warning"><i
+                            class="fas fa-edit mr-1"></i>Editar</a>
                 </td>
             </tr>
         @empty
