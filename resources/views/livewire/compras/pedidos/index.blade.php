@@ -75,6 +75,10 @@
                             class="fas fa-edit mr-1"></i>Editar</a> --}}
 
                     <button class="btn btn-sm btn-warning">Editar</button>
+
+                    {{-- Boton Modal Rechazar --}}
+                    <x-adminlte-button label="Rechazar" theme="outline-danger" class="btn-sm" icon="fas fa-store-slash" data-toggle="modal" data-target="#modal-rechazar-{{$pedido->id}}" />
+                    @livewire('compras.pedidos.rechazar', ['pedido_id' => $pedido->id], key($pedido->id))
                 </td>
             </tr>
         @empty
