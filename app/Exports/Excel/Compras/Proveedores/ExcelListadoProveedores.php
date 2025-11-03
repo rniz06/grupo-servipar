@@ -4,8 +4,9 @@ namespace App\Exports\Excel\Compras\Proveedores;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
 
-class ExcelListadoProveedores implements FromCollection, WithHeadings
+class ExcelListadoProveedores implements FromCollection, WithHeadings, WithMapping
 {
     public $datos, $encabezados;
 
