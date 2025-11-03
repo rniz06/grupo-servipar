@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('compras.COM_PRESUPUESTOS_DETALLES', function (Blueprint $table) {
+            $table->id();
             $table->integer('cantidad');
             $table->bigInteger('precio');
             $table->foreignId('producto_id')->nullable()->constrained('productos.PRO_PRODUCTOS')->cascadeOnUpdate()->cascadeOnDelete();

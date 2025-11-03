@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('compras.COM_PEDIDOS_DETALLES', function (Blueprint $table) {
+            $table->id();
             $table->integer('cantidad');
             $table->foreignId('producto_id')->nullable()->constrained('productos.PRO_PRODUCTOS')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('pedido_id')->nullable()->constrained('compras.COM_PEDIDOS')->cascadeOnUpdate()->cascadeOnDelete();
