@@ -347,6 +347,12 @@ return [
                     'route' => 'compras.pedidos.create',
                     'can' => 'Pedidos Crear',
                 ],
+
+                [
+                    'text' => 'Listar Proveedores',
+                    'route' => 'compras.proveedores.index',
+                    'can' => 'Proveedores Listar',
+                ],
             ],
         ],
         // [

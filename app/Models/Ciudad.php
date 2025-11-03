@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Compras\Proveedor;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -13,6 +14,23 @@ class Ciudad extends Model implements Auditable
     protected $table = 'CIUDADES';
 
     protected $fillable = ['ciudad', 'creado_por', 'actualizado_por'];
+
+    /*
+    |---------------------------------------
+    | RELACIONES DEL MODELO
+    |---------------------------------------
+    */
+
+    public function proveedores()
+    {
+        return $this->hasMany(Proveedor::class, 'ciudad_id');
+    }
+
+    /*
+    |---------------------------------------
+    | FIN RELACIONES DEL MODELO
+    |---------------------------------------
+    */
 
     /*
     |---------------------------------------
