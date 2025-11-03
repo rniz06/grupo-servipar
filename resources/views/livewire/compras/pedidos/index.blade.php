@@ -2,7 +2,8 @@
     <x-tabla titulo="Roles" excel pdf>
 
         <x-slot name="headerBotones">
-            <a href="#" class="btn btn-sm btn-success"><i class="fas fa-plus"></i>Añadir Pedido</a>
+            <a href="{{ route('compras.pedidos.create') }}" class="btn btn-sm btn-success"><i
+                    class="fas fa-plus"></i>Añadir Pedido</a>
         </x-slot>
         <x-slot name="cabeceras">
             {{-- Fecha Pedido --}}

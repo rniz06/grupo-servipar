@@ -14,10 +14,16 @@ class PedidoController extends Controller
     function __construct()
     {
         $this->middleware('permission:Pedidos Listar', ['only' => ['index']]);
+        $this->middleware('permission:Pedidos Crear', ['only' => ['create']]);
     }
 
     public function index()
     {
         return view('compras.pedidos.index');
+    }
+
+    public function create()
+    {
+        return view('compras.pedidos.create');
     }
 }

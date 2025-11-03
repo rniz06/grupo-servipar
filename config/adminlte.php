@@ -338,9 +338,14 @@ return [
             'icon' => 'fas fa-shopping-cart',
             'submenu' => [
                 [
-                    'text' => 'Pedidos',
+                    'text' => 'Listar Pedidos',
                     'route' => 'compras.pedidos.index',
                     'can' => 'Pedidos Listar',
+                ],
+                [
+                    'text' => 'Añadir Pedido',
+                    'route' => 'compras.pedidos.create',
+                    'can' => 'Pedidos Crear',
                 ],
             ],
         ],
