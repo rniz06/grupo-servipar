@@ -76,8 +76,10 @@
                 <td>{{ $pedido->pedidoPor->name ?? 'S/D' }}</td>
                 <td>
                     <x-tabla-dropdown>
-                        <a href="{{ route('compras.pedidos.show', $pedido->id) }}" class="dropdown-item btn-sm"><i
-                                class="far fa-eye mr-1"></i>Ver Detalles</a>
+                        @can('Pedidos Ver')
+                            <a href="{{ route('compras.pedidos.show', $pedido->id) }}" class="dropdown-item btn-sm"><i
+                                    class="far fa-eye mr-1"></i>Ver Detalles</a>
+                        @endcan
 
                         @can('Pedidos Crear Presupuesto')
                             {{-- Boton Modal Agregar Presupuesto --}}

@@ -65,18 +65,18 @@ class RolYPermisoSeeder extends Seeder
             ['permiso' => 'Usuarios Crear',               'modulo_id' => 1, 'sub_modulo_id' => 1],
             ['permiso' => 'Usuarios Ver',                 'modulo_id' => 1, 'sub_modulo_id' => 1],
             ['permiso' => 'Usuarios Editar',              'modulo_id' => 1, 'sub_modulo_id' => 1],
-            ['permiso' => 'Usuarios Inactivar',           'modulo_id' => 1, 'sub_modulo_id' => 1],
+            ['permiso' => 'Usuarios Activar/Inactivar',           'modulo_id' => 1, 'sub_modulo_id' => 1],
             ['permiso' => 'Usuarios Resetear Contrasena', 'modulo_id' => 1, 'sub_modulo_id' => 1],
             ['permiso' => 'Usuarios Asignar Rol',         'modulo_id' => 1, 'sub_modulo_id' => 1],
-            ['permiso' => 'Usuarios Exportar Excel',      'modulo_id' => 1, 'sub_modulo_id' => 1],
-            ['permiso' => 'Usuarios Exportar Pdf',        'modulo_id' => 1, 'sub_modulo_id' => 1],
+            //['permiso' => 'Usuarios Exportar Excel',      'modulo_id' => 1, 'sub_modulo_id' => 1],
+            //['permiso' => 'Usuarios Exportar Pdf',        'modulo_id' => 1, 'sub_modulo_id' => 1],
 
             // RUTAS DEL MODULO ROLES
             ['permiso' => 'Roles Listar',            'modulo_id' => 1, 'sub_modulo_id' => 2],
             ['permiso' => 'Roles Crear',             'modulo_id' => 1, 'sub_modulo_id' => 2],
             ['permiso' => 'Roles Editar',            'modulo_id' => 1, 'sub_modulo_id' => 2],
-            ['permiso' => 'Roles Exportar Excel',  'modulo_id' => 1, 'sub_modulo_id' => 2],
-            ['permiso' => 'Roles Exportar Pdf',    'modulo_id' => 1, 'sub_modulo_id' => 2],
+            //['permiso' => 'Roles Exportar Excel',  'modulo_id' => 1, 'sub_modulo_id' => 2],
+            //['permiso' => 'Roles Exportar Pdf',    'modulo_id' => 1, 'sub_modulo_id' => 2],
 
             // RUTAS DEL MODULO PEDIDOS
             ['permiso' => 'Pedidos Listar',            'modulo_id' => 2, 'sub_modulo_id' => 3],
@@ -84,15 +84,15 @@ class RolYPermisoSeeder extends Seeder
             ['permiso' => 'Pedidos Ver',               'modulo_id' => 2, 'sub_modulo_id' => 3],
             ['permiso' => 'Pedidos Crear Presupuesto', 'modulo_id' => 2, 'sub_modulo_id' => 3],
             ['permiso' => 'Pedidos Rechazar',          'modulo_id' => 2, 'sub_modulo_id' => 3],
-            ['permiso' => 'Pedidos Exportar Excel',    'modulo_id' => 2, 'sub_modulo_id' => 3],
-            ['permiso' => 'Pedidos Exportar Pdf',      'modulo_id' => 2, 'sub_modulo_id' => 3],
+            //['permiso' => 'Pedidos Exportar Excel',    'modulo_id' => 2, 'sub_modulo_id' => 3],
+            //['permiso' => 'Pedidos Exportar Pdf',      'modulo_id' => 2, 'sub_modulo_id' => 3],
 
             // RUTAS DEL MODULO PROVEEDORES
             ['permiso' => 'Proveedores Listar',            'modulo_id' => 2, 'sub_modulo_id' => 4],
             ['permiso' => 'Proveedores Crear',             'modulo_id' => 2, 'sub_modulo_id' => 4],
             ['permiso' => 'Proveedores Editar',            'modulo_id' => 2, 'sub_modulo_id' => 4],
-            ['permiso' => 'Proveedores Exportar Excel',    'modulo_id' => 2, 'sub_modulo_id' => 4],
-            ['permiso' => 'Proveedores Exportar Pdf',      'modulo_id' => 2, 'sub_modulo_id' => 4]
+            //['permiso' => 'Proveedores Exportar Excel',    'modulo_id' => 2, 'sub_modulo_id' => 4],
+            //['permiso' => 'Proveedores Exportar Pdf',      'modulo_id' => 2, 'sub_modulo_id' => 4]
         ];
 
         foreach ($permisos as $permiso) {

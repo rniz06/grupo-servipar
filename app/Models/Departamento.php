@@ -41,6 +41,11 @@ class Departamento extends Model implements Auditable
         return $this->hasMany(Pedido::class, 'departamento_id');
     }
 
+    public function user()
+    {
+        return $this->hasMany(User::class, 'departamento_id');
+    }
+
     /*
     |---------------------------------------
     | FIN RELACIONES DEL MODELO

@@ -53,6 +53,11 @@ class Sucursal extends Model implements Auditable
         return $this->hasMany(Stock::class, 'sucursal_id');
     }
 
+    public function user()
+    {
+        return $this->hasMany(User::class, 'sucursal_id');
+    }
+
     /*
     |---------------------------------------
     | FIN RELACIONES DEL MODELO

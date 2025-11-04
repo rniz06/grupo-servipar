@@ -1,10 +1,12 @@
 <div>
     <x-tabla titulo="Roles" buscador excel pdf>
 
-        <x-slot name="headerBotones">
-            <a href="{{ route('admin.roles.create') }}" class="btn btn-sm btn-success"><i
-                    class="fas fa-user-plus"></i>Añadir Rol</a>
-        </x-slot>
+        @can('Roles Crear')
+            <x-slot name="headerBotones">
+                <a href="{{ route('admin.roles.create') }}" class="btn btn-sm btn-success"><i
+                        class="fas fa-user-plus"></i>Añadir Rol</a>
+            </x-slot>
+        @endcan
         <x-slot name="cabeceras">
             {{-- # --}}
             <th>#</th>
@@ -29,8 +31,10 @@
                 <td>{{ optional($rol->created_at)->format('d/m/Y H:i:s') ?? 'S/D' }}</td>
                 <td>{{ optional($rol->updated_at)->format('d/m/Y H:i:s') ?? 'S/D' }}</td>
                 <td>
-                    <a href="{{ route('admin.roles.edit', $rol->id) }}" class="btn btn-sm btn-warning"><i
-                            class="fas fa-edit mr-1"></i>Editar</a>
+                    @can('Roles Editar')
+                        <a href="{{ route('admin.roles.edit', $rol->id) }}" class="btn btn-sm btn-warning"><i
+                                class="fas fa-edit mr-1"></i>Editar</a>
+                    @endcan
                 </td>
             </tr>
         @empty

@@ -20,6 +20,9 @@
                 <th>Email</th>
                 <th>Nro. Cedula</th>
                 <th>Nro. Celular</th>
+                <th>Empresa</th>
+                <th>Sucursal</th>
+                <th>Departamento</th>
                 <th>Obs.</th>
                 <th>Activo</th>
                 <th>Ultimo Acceso</th>
@@ -34,6 +37,9 @@
                     <td>{{ $usuario->email ?? 'S/D' }}</td>
                     <td>{{ $usuario->nro_cedula ?? 'S/D' }}</td>
                     <td>{{ $usuario->nro_celular ?? 'S/D' }}</td>
+                    <td>{{ $usuario->empresa->empresa ?? 'S/D' }}</td>
+                    <td>{{ $usuario->sucursal->sucursal ?? 'S/D' }}</td>
+                    <td>{{ $usuario->departamento->departamento ?? 'S/D' }}</td>
                     <td>{{ $usuario->observacion ?? 'S/D' }}</td>
                     <td>{{ $usuario->activo ? 'SI' : 'NO' }}</td>
                     <td>{{ !empty($usuario->ultimo_acceso) ? date('d/m/Y H:i:s', strtotime($usuario->ultimo_acceso)) : 'S/D' }}

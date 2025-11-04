@@ -1,45 +1,47 @@
 <div>
     <x-tabla titulo="Listado de Proveedores" excel pdf>
 
-        <x-slot name="headerBotones">
-            <a href="{{ route('compras.proveedores.create') }}" class="btn btn-sm btn-success"><i
-                    class="fas fa-plus"></i>Añadir Proveedor</a>
-        </x-slot>
+        @can('Proveedores Crear')
+            <x-slot name="headerBotones">
+                <a href="{{ route('compras.proveedores.create') }}" class="btn btn-sm btn-success"><i
+                        class="fas fa-plus"></i>Añadir Proveedor</a>
+            </x-slot>
+        @endcan
         <x-slot name="cabeceras">
             {{-- Razón Social --}}
             <th>
-                <x-adminlte-input name="" wire:model.live.debounce.200ms="buscarRazonsocial" oninput="this.value = this.value.toUpperCase()"
-                    label="Razón Social:" igroup-size="sm" />
+                <x-adminlte-input name="" wire:model.live.debounce.200ms="buscarRazonsocial"
+                    oninput="this.value = this.value.toUpperCase()" label="Razón Social:" igroup-size="sm" />
             </th>
 
             {{-- Ruc --}}
             <th>
-                <x-adminlte-input name="" wire:model.live.debounce.200ms="buscarRuc"
-                    label="Ruc:" igroup-size="sm" />
+                <x-adminlte-input name="" wire:model.live.debounce.200ms="buscarRuc" label="Ruc:"
+                    igroup-size="sm" />
             </th>
 
             {{-- Correo --}}
             <th>
-                <x-adminlte-input name="" wire:model.live.debounce.200ms="buscarCorreo"
-                    label="Correo:" igroup-size="sm" />
+                <x-adminlte-input name="" wire:model.live.debounce.200ms="buscarCorreo" label="Correo:"
+                    igroup-size="sm" />
             </th>
 
             {{-- Dirección --}}
             <th>
-                <x-adminlte-input name="" wire:model.live.debounce.200ms="buscarDireccion"
-                    label="Dirección:" igroup-size="sm" />
+                <x-adminlte-input name="" wire:model.live.debounce.200ms="buscarDireccion" label="Dirección:"
+                    igroup-size="sm" />
             </th>
 
             {{-- Teléfono --}}
             <th>
-                <x-adminlte-input name="" wire:model.live.debounce.200ms="buscarTelefono"
-                    label="Teléfono:" igroup-size="sm" />
+                <x-adminlte-input name="" wire:model.live.debounce.200ms="buscarTelefono" label="Teléfono:"
+                    igroup-size="sm" />
             </th>
 
             {{-- Ciudad --}}
             <th>
-                <x-adminlte-select name="" wire:model.live.debounce.200ms="buscarCiudadId"
-                    label="Ciudad:" igroup-size="sm">
+                <x-adminlte-select name="" wire:model.live.debounce.200ms="buscarCiudadId" label="Ciudad:"
+                    igroup-size="sm">
                     <option value="">-- Todos --</option>
                     @foreach ($ciudades as $ciudad)
                         <option value="{{ $ciudad->id }}">{{ $ciudad->ciudad ?? 'S/D' }}</option>
@@ -62,8 +64,10 @@
                 <td>{{ $proveedor->telefono ?? 'S/D' }}</td>
                 <td>{{ $proveedor->ciudad->ciudad ?? 'S/D' }}</td>
                 <td>
-                    <a href="{{ route('compras.proveedores.edit', $proveedor->id) }}" class="btn btn-sm btn-warning"><i
-                            class="fas fa-edit mr-1"></i>Editar</a>
+                    @can('Proveedores Editar')
+                        <a href="{{ route('compras.proveedores.edit', $proveedor->id) }}" class="btn btn-sm btn-warning"><i
+                                class="fas fa-edit mr-1"></i>Editar</a>
+                    @endcan
                 </td>
             </tr>
         @empty

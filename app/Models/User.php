@@ -34,6 +34,9 @@ class User extends Authenticatable implements Auditable
         'password',
         'activo',
         'ultimo_acceso',
+        'empresa_id',
+        'sucursal_id',
+        'departamento_id',
         'creado_por',
         'actualizado_por',
     ];
@@ -67,6 +70,33 @@ class User extends Authenticatable implements Auditable
     {
         static::findOrFail($id)->update(['ultimo_acceso' => now()]);
     }
+
+    /*
+    |---------------------------------------
+    | RELACIONES DEL MODELO
+    |---------------------------------------
+    */
+
+    public function empresa()
+    {
+        return $this->belongsTo(Empresa::class, 'empresa_id');
+    }
+
+    public function sucursal()
+    {
+        return $this->belongsTo(Sucursal::class, 'sucursal_id');
+    }
+
+    public function departamento()
+    {
+        return $this->belongsTo(Departamento::class, 'departamento_id');
+    }
+
+    /*
+    |---------------------------------------
+    | FIN RELACIONES DEL MODELO
+    |---------------------------------------
+    */
 
     /**
      * Busquedor General.
@@ -158,6 +188,39 @@ class User extends Authenticatable implements Auditable
     {
         $query->when($search, function (Builder $query, $search) {
             $query->where('activo', $search);
+        });
+    }
+
+    /**
+     * Buscador Por Campo empresa_id.
+     */
+    #[Scope]
+    protected function buscarEmpresaId(Builder $query, $search): void
+    {
+        $query->when($search, function (Builder $query, $search) {
+            $query->where('empresa_id', $search);
+        });
+    }
+
+    /**
+     * Buscador Por Campo sucursal_id.
+     */
+    #[Scope]
+    protected function buscarSucursalId(Builder $query, $search): void
+    {
+        $query->when($search, function (Builder $query, $search) {
+            $query->where('sucursal_id', $search);
+        });
+    }
+
+    /**
+     * Buscador Por Campo departamento_id.
+     */
+    #[Scope]
+    protected function buscarDepartamentoId(Builder $query, $search): void
+    {
+        $query->when($search, function (Builder $query, $search) {
+            $query->where('departamento_id', $search);
         });
     }
 }

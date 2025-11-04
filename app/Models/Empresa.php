@@ -53,6 +53,11 @@ class Empresa extends Model implements Auditable
         return $this->hasMany(Stock::class, 'empresa_id');
     }
 
+    public function user()
+    {
+        return $this->hasMany(User::class, 'empresa_id');
+    }
+
     /*
     |---------------------------------------
     | FIN RELACIONES DEL MODELO

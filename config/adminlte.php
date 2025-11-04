@@ -324,12 +324,12 @@ return [
                 [
                     'text' => 'Usuarios',
                     'route' => 'admin.usuarios.index',
-                    'can' => 'SuperAdmin',
+                    'can' => 'Usuarios Listar',
                 ],
                 [
                     'text' => 'Roles',
                     'route' => 'admin.roles.index',
-                    'can' => 'SuperAdmin',
+                    'can' => 'Roles Listar',
                 ],
             ],
         ],

@@ -7,6 +7,17 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+    /**
+     * Establece los middleware necesarios para gestionar permisos
+     * Se utilizan permisos específicos para cada acción del controlador.
+     */
+    function __construct()
+    {
+        $this->middleware('permission:Roles Listar', ['only' => ['index']]);
+        $this->middleware('permission:Roles Crear', ['only' => ['create']]);
+        $this->middleware('permission:Roles Editar', ['only' => ['edit']]);
+    }
+
     public function index()
     {
         return view('admin.roles.index');

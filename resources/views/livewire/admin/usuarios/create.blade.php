@@ -52,6 +52,42 @@
                 </x-slot>
             </x-adminlte-input>
 
+            {{-- Empresa --}}
+            <x-adminlte-select name="empresa_id" wire:model.blur="empresa_id" label-class="text-lightblue"
+                fgroup-class="col-md-4" igroup-size="sm">
+                <option value="">-- Seleccionar --</option>
+                @foreach ($empresas as $empresa)
+                    <option value="{{ $empresa->id ?? 'S/D' }}">{{ $empresa->empresa ?? 'S/D' }}</option>
+                @endforeach
+                <x-slot name="prependSlot">
+                    <div class="input-group-text">Empresa *</div>
+                </x-slot>
+            </x-adminlte-select>
+
+            {{-- Sucursal --}}
+            <x-adminlte-select name="sucursal_id" wire:model.blur="sucursal_id" label-class="text-lightblue"
+                fgroup-class="col-md-4" igroup-size="sm">
+                <option value="">-- Seleccionar --</option>
+                @foreach ($sucursales as $sucursal)
+                    <option value="{{ $sucursal->id ?? 'S/D' }}">{{ $sucursal->sucursal ?? 'S/D' }}</option>
+                @endforeach
+                <x-slot name="prependSlot">
+                    <div class="input-group-text">Sucursal *</div>
+                </x-slot>
+            </x-adminlte-select>
+
+            {{-- Departamento --}}
+            <x-adminlte-select name="departamento_id" wire:model.blur="departamento_id" label-class="text-lightblue"
+                fgroup-class="col-md-4" igroup-size="sm">
+                <option value="">-- Seleccionar --</option>
+                @foreach ($departamentos as $departamento)
+                    <option value="{{ $departamento->id ?? 'S/D' }}">{{ $departamento->departamento ?? 'S/D' }}</option>
+                @endforeach
+                <x-slot name="prependSlot">
+                    <div class="input-group-text">Departamento *</div>
+                </x-slot>
+            </x-adminlte-select>
+
             {{-- Observacion --}}
             <x-adminlte-textarea name="observacion" wire:model.blur="observacion"
                 oninput="this.value = this.value.toUpperCase()" placeholder="EJ: USUARIO CREADO PARA..."

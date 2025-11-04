@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('admin')->name('admin.')->middleware('role:SuperAdmin')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
     // RUTAS DEL MODULO USUARIOS
     Route::controller(UsuarioController::class)->group(function () {

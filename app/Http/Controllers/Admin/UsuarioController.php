@@ -8,6 +8,18 @@ use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
 {
+    /**
+     * Establece los middleware necesarios para gestionar permisos
+     * Se utilizan permisos específicos para cada acción del controlador.
+     */
+    function __construct()
+    {
+        $this->middleware('permission:Usuarios Listar', ['only' => ['index']]);
+        $this->middleware('permission:Usuarios Crear', ['only' => ['create']]);
+        $this->middleware('permission:Usuarios Editar', ['only' => ['edit']]);
+        $this->middleware('permission:Usuarios Asignar Rol', ['only' => ['asignarRolAUsuario', 'asignarRol']]);
+    }
+
     public function index()
     {
         return view('admin.usuarios.index');
