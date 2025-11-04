@@ -15,6 +15,7 @@ class PedidoController extends Controller
     {
         $this->middleware('permission:Pedidos Listar', ['only' => ['index']]);
         $this->middleware('permission:Pedidos Crear', ['only' => ['create']]);
+        $this->middleware('permission:Pedidos Ver', ['only' => ['show']]);
     }
 
     public function index()
@@ -25,5 +26,10 @@ class PedidoController extends Controller
     public function create()
     {
         return view('compras.pedidos.create');
+    }
+
+    public function show($pedido)
+    {
+        return view('compras.pedidos.show', compact('pedido'));
     }
 }

@@ -14,6 +14,22 @@ class DepartamentoSeeder extends Seeder
     public function run(): void
     {
         Departamento::create([
+            'departamento' => 'RUBILOCK',
+            'empresa_id' => 1,
+            'sucursal_id' => 1,
+            'responsable_id' => 1,
+            'creado_por' => 1 //ADMINISTRADOR
+        ]);
+
+        Departamento::create([
+            'departamento' => 'RECURSOS HUMANOS',
+            'empresa_id' => 1,
+            'sucursal_id' => 1,
+            'responsable_id' => 1,
+            'creado_por' => 1 //ADMINISTRADOR
+        ]);
+
+        Departamento::create([
             'departamento' => 'COMPRAS',
             'empresa_id' => 1,
             'sucursal_id' => 1,

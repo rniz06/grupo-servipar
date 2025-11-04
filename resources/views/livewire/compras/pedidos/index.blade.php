@@ -72,7 +72,8 @@
                 <td>{{ $pedido->pedidoPor->name ?? 'S/D' }}</td>
                 <td>
                     <x-tabla-dropdown>
-                        <a href="#" class="dropdown-item btn-sm"><i class="fas fa-edit"></i>Editar</a>
+                        <a href="{{ route('compras.pedidos.show', $pedido->id) }}" class="dropdown-item btn-sm"><i
+                                class="far fa-eye mr-1"></i>Ver Detalles</a>
 
                         {{-- Boton Modal Agregar Presupuesto --}}
                         <x-adminlte-button label="Agregar Presupuesto" class="dropdown-item btn-sm" icon="fas fa-plus"

@@ -27,6 +27,21 @@ class Index extends Component
         $this->sucursales    = Sucursal::select('id', 'sucursal')->orderBy('sucursal')->get();
     }
 
+    // Limpiar el buscador y la paginación al cambiar de pagina
+    public function updating($key): void
+    {
+        if (in_array($key, [
+            'buscarFechaPedido',
+            'buscarFechaEntrega',
+            'buscarEstado',
+            'buscarDepartamentoId',
+            'buscarSucursalId',
+            'paginado',
+        ])) {
+            $this->resetPage();
+        }
+    }
+
     public function render()
     {
         return view('livewire.compras.pedidos.index', [
