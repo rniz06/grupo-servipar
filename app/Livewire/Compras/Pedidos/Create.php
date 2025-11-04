@@ -6,6 +6,7 @@ use App\Enums\Compras\PedidoEstado;
 use App\Models\Compras\Pedido;
 use App\Models\Compras\PedidoComentario;
 use App\Models\Compras\PedidoDetalle;
+use App\Models\Productos\Categoria;
 use App\Models\Productos\Producto;
 use App\Models\User;
 use Carbon\Carbon;
@@ -33,7 +34,14 @@ class Create extends Component
         $this->estado       = PedidoEstado::PENDIENTE;
         $this->pedido_por   = Auth::user()->name;
 
-        $this->productos    = Producto::with('categoria:id,categoria,nivel')->get();
+        // $this->productos    = Producto::with('categoria:id,categoria,nivel')->get();
+        $this->productos = Producto::select('productos.PRO_PRODUCTOS.*')
+            ->join((new Categoria)->getTable(), 'productos.PRO_PRODUCTOS.categoria_id', '=', (new Categoria)->getTable() . '.id')
+            ->with('categoria:id,categoria,nivel')
+            ->orderBy((new Categoria)->getTable() . '.nivel', 'asc')
+            ->orderBy((new Producto)->getTable() . '.nombre', 'asc')
+            ->get();
+
 
         // Iniciar con un item vacío
         $this->items = [
