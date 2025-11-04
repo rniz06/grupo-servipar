@@ -1,10 +1,14 @@
 <div>
     <x-tabla titulo="Listado de Pedidos" excel pdf>
 
-        <x-slot name="headerBotones">
-            <a href="{{ route('compras.pedidos.create') }}" class="btn btn-sm btn-success"><i
-                    class="fas fa-plus"></i>Añadir Pedido</a>
-        </x-slot>
+        @canany(['Pedidos Crear'])
+            <x-slot name="headerBotones">
+                @can('Pedidos Crear')
+                    <a href="{{ route('compras.pedidos.create') }}" class="btn btn-sm btn-success"><i
+                            class="fas fa-plus"></i>Añadir Pedido</a>
+                @endcan
+            </x-slot>
+        @endcanany
         <x-slot name="cabeceras">
             {{-- Fecha Pedido --}}
             <th>
@@ -75,13 +79,17 @@
                         <a href="{{ route('compras.pedidos.show', $pedido->id) }}" class="dropdown-item btn-sm"><i
                                 class="far fa-eye mr-1"></i>Ver Detalles</a>
 
-                        {{-- Boton Modal Agregar Presupuesto --}}
-                        <x-adminlte-button label="Agregar Presupuesto" class="dropdown-item btn-sm" icon="fas fa-plus"
-                            data-toggle="modal" data-target="#modal-presupuesto-{{ $pedido->id }}" />
+                        @can('Pedidos Crear Presupuesto')
+                            {{-- Boton Modal Agregar Presupuesto --}}
+                            <x-adminlte-button label="Agregar Presupuesto" class="dropdown-item btn-sm" icon="fas fa-plus"
+                                data-toggle="modal" data-target="#modal-presupuesto-{{ $pedido->id }}" />
+                        @endcan
 
-                        {{-- Boton Modal Rechazar --}}
-                        <x-adminlte-button label="Rechazar" class="dropdown-item btn-sm" icon="fas fa-store-slash"
-                            data-toggle="modal" data-target="#modal-rechazar-{{ $pedido->id }}" />
+                        @can('Pedidos Rechazar')
+                            {{-- Boton Modal Rechazar --}}
+                            <x-adminlte-button label="Rechazar" class="dropdown-item btn-sm" icon="fas fa-store-slash"
+                                data-toggle="modal" data-target="#modal-rechazar-{{ $pedido->id }}" />
+                        @endcan
 
                     </x-tabla-dropdown>
 
