@@ -67,6 +67,11 @@ class Pedido extends Model implements Auditable
         return $this->hasMany(Compra::class, 'pedido_id');
     }
 
+    public function presupuestos()
+    {
+        return $this->hasMany(Presupuesto::class, 'pedido_id');
+    }
+
     /*
     |---------------------------------------
     | FIN RELACIONES DEL MODELO

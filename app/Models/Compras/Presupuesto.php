@@ -16,13 +16,18 @@ class Presupuesto extends Model implements Auditable
 
     protected $table = 'compras.COM_PRESUPUESTOS';
 
-    protected $fillable = ['fecha', 'fecha_entrega', 'estado', 'proveedor_id', 'empresa_id', 'sucursal_id', 'creado_por', 'actualizado_por'];
+    protected $fillable = ['fecha', 'fecha_entrega', 'estado', 'pedido_id', 'proveedor_id', 'empresa_id', 'sucursal_id', 'creado_por', 'actualizado_por'];
 
     /*
     |---------------------------------------
     | RELACIONES DEL MODELO
     |---------------------------------------
     */
+
+    public function pedido()
+    {
+        return $this->belongsTo(Pedido::class, 'pedido_id');
+    }
 
     public function proveedor()
     {
@@ -42,6 +47,11 @@ class Presupuesto extends Model implements Auditable
     public function compras()
     {
         return $this->hasMany(Compra::class, 'presupuesto_id');
+    }
+
+    public function presupuestosDetalles()
+    {
+        return $this->hasMany(PresupuestoDetalle::class, 'presupuesto_id');
     }
 
     /*

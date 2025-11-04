@@ -4,8 +4,7 @@ namespace App\Enums\Compras;
 
 enum PresupuestoEstado: string
 {
-    case PENDIENTE = 'PENDIENTE';
-    case ENPROCESO  = 'EN PROCESO';
+    case ENREVISION = 'EN REVISION';
     case APROBADO  = 'APROBADO';
     case RECHAZADO  = 'RECHAZADO';
 }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->date('fecha');
             $table->date('fecha_entrega')->nullable();
             $table->enum('estado', ['EN REVISION', 'APROBADO', 'RECHAZADO']);
+            $table->foreignId('pedido_id')->nullable()->constrained('compras.COM_PEDIDOS')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('proveedor_id')->nullable()->constrained('compras.COM_PROVEEDORES')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('empresa_id')->nullable()->constrained('EMPRESAS')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('sucursal_id')->nullable()->constrained('SUCURSALES')->cascadeOnUpdate()->cascadeOnDelete();

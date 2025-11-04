@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->integer('cantidad');
             $table->bigInteger('precio');
+            $table->foreignId('presupuesto_id')->nullable()->constrained('compras.COM_PRESUPUESTOS')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('producto_id')->nullable()->constrained('productos.PRO_PRODUCTOS')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('pedido_id')->nullable()->constrained('compras.COM_PEDIDOS')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('creado_por')->nullable()->references('id')->on('public.users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('public.users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();

@@ -16,7 +16,7 @@
 
         <div class="col-md-12 row">
             {{-- Fecha Pedido --}}
-            <x-adminlte-input name label-class="text-lightblue" value="{{ $pedido->fecha_pedido->format('d/m/Y') }}"
+            <x-adminlte-input name label-class="text-lightblue" value="{{ $pedido->fecha_pedido->format('d/m/Y') ?? 'S/D' }}"
                 fgroup-class="col-md-4" igroup-size="sm" disabled>
                 <x-slot name="prependSlot">
                     <div class="input-group-text">Fecha Pedido:</div>
@@ -24,7 +24,7 @@
             </x-adminlte-input>
 
             {{-- Pedido Por --}}
-            <x-adminlte-input name label-class="text-lightblue" value="{{ $pedido->pedidoPor->name }}"
+            <x-adminlte-input name label-class="text-lightblue" value="{{ $pedido->pedidoPor->name ?? 'S/D' }}"
                 fgroup-class="col-md-4" igroup-size="sm" disabled>
                 <x-slot name="prependSlot">
                     <div class="input-group-text">Pedido Por</div>
@@ -32,7 +32,7 @@
             </x-adminlte-input>
 
             {{-- Departamento --}}
-            <x-adminlte-input name label-class="text-lightblue" value="{{ $pedido->departamento->departamento }}"
+            <x-adminlte-input name label-class="text-lightblue" value="{{ $pedido->departamento->departamento ?? 'S/D' }}"
                 fgroup-class="col-md-4" igroup-size="sm" disabled>
                 <x-slot name="prependSlot">
                     <div class="input-group-text">Departamento</div>
@@ -60,9 +60,10 @@
         </div>
 
         <x-slot name="footerSlot">
-            <x-adminlte-button theme="outline-secondary" icon="fas fa-arrow-left" class="mr-auto" label="Cerrar"
+            <x-adminlte-button theme="outline-secondary" icon="fas fa-arrow-left" class="btn-sm mr-auto" label="Cerrar"
                 data-dismiss="modal" />
-            <x-adminlte-button wire:click="grabar" icon="fas fa-save" theme="outline-success" label="Guardar" />
+            <x-adminlte-button wire:click="grabar" icon="fas fa-save" theme="outline-success" label="Guardar"
+                class="btn-sm" />
         </x-slot>
     </x-adminlte-modal>
 </div>

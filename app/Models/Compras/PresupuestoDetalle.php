@@ -14,7 +14,7 @@ class PresupuestoDetalle extends Model implements Auditable
 
     protected $table = 'compras.COM_PRESUPUESTOS_DETALLES';
 
-    protected $fillable = ['cantidad', 'precio', 'producto_id', 'pedido_id', 'creado_por', 'actualizado_por'];
+    protected $fillable = ['cantidad', 'precio', 'presupuesto_id', 'producto_id', 'creado_por', 'actualizado_por'];
 
     /*
     |---------------------------------------
@@ -22,14 +22,14 @@ class PresupuestoDetalle extends Model implements Auditable
     |---------------------------------------
     */
 
+    public function presupuesto()
+    {
+        return $this->belongsTo(Presupuesto::class, 'presupuesto_id');
+    }
+
     public function producto()
     {
         return $this->belongsTo(Producto::class, 'producto_id');
-    }
-
-    public function pedido()
-    {
-        return $this->belongsTo(Pedido::class, 'pedido_id');
     }
 
     /*

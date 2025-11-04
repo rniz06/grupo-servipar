@@ -1,5 +1,5 @@
 <div>
-    <x-tabla titulo="Roles" excel pdf>
+    <x-tabla titulo="Listado de Pedidos" excel pdf>
 
         <x-slot name="headerBotones">
             <a href="{{ route('compras.pedidos.create') }}" class="btn btn-sm btn-success"><i
@@ -71,13 +71,23 @@
                 <td>{{ $pedido->sucursal->sucursal ?? 'S/D' }}</td>
                 <td>{{ $pedido->pedidoPor->name ?? 'S/D' }}</td>
                 <td>
-                    {{-- <a href="{{ route('admin.roles.edit', $rol->id) }}" class="btn btn-sm btn-warning"><i
-                            class="fas fa-edit mr-1"></i>Editar</a> --}}
+                    <x-tabla-dropdown>
+                        <a href="#" class="dropdown-item btn-sm"><i class="fas fa-edit"></i>Editar</a>
 
-                    <button class="btn btn-sm btn-warning">Editar</button>
+                        {{-- Boton Modal Agregar Presupuesto --}}
+                        <x-adminlte-button label="Agregar Presupuesto" class="dropdown-item btn-sm" icon="fas fa-plus"
+                            data-toggle="modal" data-target="#modal-presupuesto-{{ $pedido->id }}" />
 
-                    {{-- Boton Modal Rechazar --}}
-                    <x-adminlte-button label="Rechazar" theme="outline-danger" class="btn-sm" icon="fas fa-store-slash" data-toggle="modal" data-target="#modal-rechazar-{{$pedido->id}}" />
+                        {{-- Boton Modal Rechazar --}}
+                        <x-adminlte-button label="Rechazar" class="dropdown-item btn-sm" icon="fas fa-store-slash"
+                            data-toggle="modal" data-target="#modal-rechazar-{{ $pedido->id }}" />
+
+                    </x-tabla-dropdown>
+
+                    {{-- Modal Agregar Presupuesto --}}
+                    @livewire('compras.pedidos.presupuesto', ['pedido_id' => $pedido->id], key($pedido->id))
+
+                    {{-- Modal Rechazar --}}
                     @livewire('compras.pedidos.rechazar', ['pedido_id' => $pedido->id], key($pedido->id))
                 </td>
             </tr>
