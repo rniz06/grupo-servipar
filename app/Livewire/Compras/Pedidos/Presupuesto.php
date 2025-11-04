@@ -32,13 +32,12 @@ class Presupuesto extends Component
 
         $this->productos    = Producto::with('categoria:id,categoria,nivel')->get();
 
-        // Inicializar $items con los productos del pedido
        // Inicializar items directamente, con fallback usando operador ternario
     $this->items = $this->pedido->pedidoDetalle->isNotEmpty()
         ? $this->pedido->pedidoDetalle->map(fn($detalle) => [
             'producto_id' => $detalle->producto_id,
             'cantidad'    => $detalle->cantidad,
-            'precio'      => null, // o $detalle->precio si lo tenés en la tabla
+            'precio'      => null
         ])->toArray()
         : [['producto_id' => null, 'cantidad' => 1, 'precio' => null]];
     }
