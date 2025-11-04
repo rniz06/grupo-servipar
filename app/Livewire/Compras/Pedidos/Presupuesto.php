@@ -27,15 +27,20 @@ class Presupuesto extends Component
 
     public function mount($pedido_id)
     {
-        $this->pedido = Pedido::findOrFail($pedido_id);
+        $this->pedido = Pedido::select('id')->with(['pedidoDetalle:id,producto_id,pedido_id,cantidad'])->findOrFail($pedido_id);
         $this->proveedores = Proveedor::select('id', 'razon_social', 'ruc')->orderBy('razon_social')->get();
 
         $this->productos    = Producto::with('categoria:id,categoria,nivel')->get();
 
-        // Iniciar con un item vacío
-        $this->items = [
-            ['producto_id' => null, 'cantidad' => 1, 'precio' => null],
-        ];
+        // Inicializar $items con los productos del pedido
+       // Inicializar items directamente, con fallback usando operador ternario
+    $this->items = $this->pedido->pedidoDetalle->isNotEmpty()
+        ? $this->pedido->pedidoDetalle->map(fn($detalle) => [
+            'producto_id' => $detalle->producto_id,
+            'cantidad'    => $detalle->cantidad,
+            'precio'      => null, // o $detalle->precio si lo tenés en la tabla
+        ])->toArray()
+        : [['producto_id' => null, 'cantidad' => 1, 'precio' => null]];
     }
 
     protected function rules()

@@ -49,7 +49,7 @@ class Pedido extends Model implements Auditable
 
     public function pedidoDetalle()
     {
-        return $this->hasMany(PedidoDetalle::class, 'producto_id');
+        return $this->hasMany(PedidoDetalle::class, 'pedido_id');
     }
 
     public function pedidoRechazado()
