@@ -83,54 +83,34 @@
 
                 <h5 class="font-weight-bold">Detalles</h5>
                 <hr>
-                <ul class="list-unstyled">
-                    <li>
-                        <span class="font-weight-bold">Fecha Pedido:</span>
-                        {{ optional($pedido->fecha_pedido)->format('d/m/Y') ?? 'S/D' }}
-                    </li>
-                    <li>
-                        <span class="font-weight-bold">Estado:</span> {{ $pedido->estado ?? 'S/D' }}
-                    </li>
-                    <li>
-                        <span class="font-weight-bold">Pedido Por:</span> {{ $pedido->pedidoPor->name ?? 'S/D' }}
-                    </li>
 
-                    <li>
-                        <span class="font-weight-bold">Departamento:</span>
-                        {{ $pedido->departamento->departamento ?? 'S/D' }}
-                    </li>
+                <dl class="row">
+                    <dt class="col-md-4">Fecha Pedido:</dt>
+                    <dd class="col-md-8">{{ optional($pedido->fecha_pedido)->format('d/m/Y') ?? 'S/D' }}</dd>
 
-                    <li>
-                        <span class="font-weight-bold">Sucursal:</span> {{ $pedido->sucursal->sucursal ?? 'S/D' }}
-                    </li>
-                </ul>
+                    <dt class="col-md-4">Estado:</dt>
+                    <dd class="col-md-8">{{ $pedido->estado ?? 'S/D' }}</dd>
+
+                    <dt class="col-md-4">Pedido Por:</dt>
+                    <dd class="col-md-8">{{ $pedido->pedidoPor->name ?? 'S/D' }}</dd>
+
+                    <dt class="col-md-4">Departamento:</dt>
+                    <dd class="col-md-8">{{ $pedido->departamento->departamento ?? 'S/D' }}</dd>
+
+                    <dt class="col-md-4">Sucursal:</dt>
+                    <dd class="col-md-8">{{ $pedido->sucursal->sucursal ?? 'S/D' }}</dd>
+                </dl>
 
                 <hr>
                 <h4>Items Solicitados</h4>
-                <table class="table table-sm">
-                    <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>Cantidad</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($items as $item)
-                            <tr>
-                                <td>{{ $item->producto->nombre ?? 'S/D' }}</td>
-                                <td>{{ $item->cantidad ?? 'S/D' }}</td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="100%" class="text-center text-muted">Sin resultados coincidentes...</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-                {{-- <div class="text-center mt-5 mb-3">
-                    <a href="#" class="btn btn-sm btn-primary">Add files</a>
-                    <a href="#" class="btn btn-sm btn-warning">Report contact</a>
-                </div> --}}
+                <dl class="row">
+                    @forelse ($items as $item)
+                        <dt class="col-md-4">{{ $item->producto->nombre ?? 'S/D' }}:</dt>
+                        <dd class="col-md-8">{{ $item->cantidad ?? 'S/D' }}</dd>
+                    @empty
+                        <dt class="col-md-4">Sin registros...</dt>
+                    @endforelse
+                </dl>
             </div>
         </div>
 
