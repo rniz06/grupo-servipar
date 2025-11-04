@@ -45,65 +45,32 @@
                 <div class="row">
                     <div class="col-12">
                         <h4>Historico del Pedido</h4>
-                        <div class="post">
-                            <div class="user-block">
-                                <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg"
-                                    alt="user image">
-                                <span class="username">
-                                    <a href="#">Jonathan Burke Jr.</a>
-                                </span>
-                                <span class="description">Shared publicly - 7:45 PM today</span>
-                            </div>
-                            <!-- /.user-block -->
-                            <p>
-                                Lorem ipsum represents a long-held tradition for designers,
-                                typographers and the like. Some people hate it and argue for
-                                its demise, but others ignore.
-                            </p>
-
-                            <p>
-                                <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo
-                                    File 1 v2</a>
-                            </p>
-                        </div>
-
-                        <div class="post clearfix">
-                            <div class="user-block">
-                                <img class="img-circle img-bordered-sm" src="../../dist/img/user7-128x128.jpg"
-                                    alt="User Image">
-                                <span class="username">
-                                    <a href="#">Sarah Ross</a>
-                                </span>
-                                <span class="description">Sent you a message - 3 days ago</span>
-                            </div>
-                            <!-- /.user-block -->
-                            <p>
-                                Lorem ipsum represents a long-held tradition for designers,
-                                typographers and the like. Some people hate it and argue for
-                                its demise, but others ignore.
-                            </p>
-                            <p>
-                                <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo
-                                    File 2</a>
-                            </p>
-                        </div>
-
-                        <div class="post">
-                            <div class="user-block">
-                                <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg"
-                                    alt="user image">
-                                <span class="username">
-                                    <a href="#">Jonathan Burke Jr.</a>
-                                </span>
-                                <span class="description">Shared publicly - 5 days ago</span>
-                            </div>
-                            <!-- /.user-block -->
-                            <p>
-                                Lorem ipsum represents a long-held tradition for designers,
-                                typographers and the like. Some people hate it and argue for
-                                its demise, but others ignore.
-                            </p>
-                        </div>
+                        @forelse ($comentarios as $comentario)
+                            @if ($loop->first)
+                                <ul>
+                            @endif
+                            <li>
+                                <div class="card p-2">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="mb-0">
+                                            <span
+                                                class="font-weight-bold">{{ $comentario->creadoPor->name ?? 'S/D' }}</span>
+                                            {{ $comentario->comentario ?? 'S/D' }}
+                                        </p>
+                                        <small class="text-muted ms-3">
+                                            <i class="fas fa-clock"></i>
+                                            {{ optional($comentario->created_at)->format('d/m/Y H:i:s') ?? 'S/D' }}
+                                            Hs.
+                                        </small>
+                                    </div>
+                                </div>
+                            </li>
+                            @if ($loop->last)
+                                </ul>
+                            @endif
+                        @empty
+                            <p class="font-italic font-weight-bold">SIN DATOS...</p>
+                        @endforelse
                     </div>
                 </div>
             </div>

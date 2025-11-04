@@ -3,6 +3,7 @@
 namespace App\Livewire\Compras\Pedidos;
 
 use App\Models\Compras\Pedido;
+use App\Models\Compras\PedidoComentario;
 use App\Models\Compras\PedidoDetalle;
 use App\Models\Compras\PedidoRechazado;
 use App\Models\Compras\Presupuesto;
@@ -13,9 +14,9 @@ class Show extends Component
 {
     use WithPagination;
 
-    public $pedido, $anulado, $items;
+    public $pedido, $anulado, $items, $comentarios;
 
-    public $presupuestosPaginado = 5;
+    public $comentariosPaginado = 5, $presupuestosPaginado = 5;
 
     public function mount($pedido_id)
     {
@@ -24,6 +25,10 @@ class Show extends Component
         $this->anulado = PedidoRechazado::select('id', 'motivo', 'creado_por')->with(['creadoPor:id,name'])->where('pedido_id', $pedido_id)->first() ?? null;
 
         $this->items = PedidoDetalle::select('id', 'cantidad', 'producto_id')->with(['producto:id,nombre'])->where('pedido_id', $pedido_id)->get();
+
+        $this->comentarios = PedidoComentario::select('id', 'comentario', 'creado_por', 'created_at')->with(['creadoPor:id,name'])
+            ->orderByDesc('created_at')
+            ->get();
     }
 
     // Limpiar el buscador y la paginación al cambiar de pagina

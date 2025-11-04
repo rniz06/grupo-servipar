@@ -4,6 +4,7 @@ namespace App\Livewire\Compras\Pedidos;
 
 use App\Enums\Compras\PresupuestoEstado;
 use App\Models\Compras\Pedido;
+use App\Models\Compras\PedidoComentario;
 use App\Models\Compras\Presupuesto as ComprasPresupuesto;
 use App\Models\Compras\PresupuestoDetalle;
 use App\Models\Compras\Proveedor;
@@ -100,6 +101,12 @@ class Presupuesto extends Component
                     'creado_por'     => $usuario->id
                 ]);
             }
+
+            PedidoComentario::create([
+                'comentario' => "AGREGÓ PRESUPUESTO",
+                'pedido_id'  => $this->pedido->id,
+                'creado_por' => Auth::id()
+            ]);
         });
 
         session()->flash('success', 'Presupuesto Agregado correctamente.');
