@@ -100,13 +100,15 @@ class Pedido extends Model implements Auditable
     */
 
     /**
-     * Busqueda por campo fecha_pedido.
+     * Filtrar solo si NO tiene rol de Compras ni SuperAdmin.
      */
     #[Scope]
-    protected function filtrarPorDepartamento(Builder $query): void
+    protected function filtrarSinRolEspecifico(Builder $query): void
     {
         $usuario = Auth::user();
-        $query->where('departamento_actual_id', $usuario->departamento_id);
+        if (! $usuario->hasAnyRole(['Compras', 'SuperAdmin'])) {
+            $query->where('departamento_solicitante_id', $usuario->departamento_id);
+        }
     }
 
     /**

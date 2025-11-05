@@ -6,6 +6,7 @@ use App\Enums\Compras\PedidoEstado;
 use App\Models\Compras\Pedido;
 use App\Models\Departamento;
 use App\Models\Sucursal;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -46,24 +47,37 @@ class Index extends Component
 
     public function render()
     {
+        $usuario = Auth::user();
+
+        $query = Pedido::select(
+            'id',
+            'fecha_pedido',
+            'fecha_entrega',
+            'estado',
+            'departamento_actual_id',
+            'departamento_solicitante_id',
+            'sucursal_id',
+            'pedido_por'
+        )
+            ->filtrarSinRolEspecifico()
+            ->buscarFechaPedido($this->buscarFechaPedido)
+            ->buscarFechaEntrega($this->buscarFechaEntrega)
+            ->buscarEstado($this->buscarEstado)
+            ->buscarDepartamentoActualId($this->buscarDepartamentoActualId)
+            ->buscarDepartamentoSolicitanteId($this->buscarDepartamentoSolicitanteId)
+            ->with([
+                'departamentoActual:id,departamento',
+                'departamentoSolicitante:id,departamento',
+                'sucursal:id,sucursal',
+                'pedidoPor:id,name'
+            ]);
+
+        
+
+        $pedidos = $query->paginate($this->paginado);
+
         return view('livewire.compras.pedidos.index', [
-            'pedidos' => Pedido::select(
-                'id',
-                'fecha_pedido',
-                'fecha_entrega',
-                'estado',
-                'departamento_actual_id',
-                'departamento_solicitante_id',
-                'sucursal_id',
-                'pedido_por'
-            )
-                ->buscarFechaPedido($this->buscarFechaPedido)
-                ->buscarFechaEntrega($this->buscarFechaEntrega)
-                ->buscarEstado($this->buscarEstado)
-                ->buscarDepartamentoActualId($this->buscarDepartamentoActualId)
-                ->buscarDepartamentoSolicitanteId($this->buscarDepartamentoSolicitanteId)
-                ->with(['departamentoActual:id,departamento', 'departamentoSolicitante:id,departamento', 'sucursal:id,sucursal', 'pedidoPor:id,name'])
-                ->paginate($this->paginado)
+            'pedidos' => $pedidos
         ]);
     }
 }
