@@ -89,14 +89,16 @@ class Create extends Component
             $usuario = Auth::user();
             // Crear Cabecera
             $pedido = Pedido::create([
-                'fecha_pedido'    => Carbon::now()->format('Y-m-d'),
-                'estado'          => PedidoEstado::PENDIENTE,
-                'pedido_por'      => $usuario->id,
-                'departamento_id' => $usuario->departamento_id,
-                'empresa_id'      => $usuario->empresa_id,
-                'sucursal_id'     => $usuario->sucursal_id,
-                'creado_por'      => $usuario->id
+                'fecha_pedido'                => Carbon::now()->format('Y-m-d'),
+                'estado'                      => PedidoEstado::PENDIENTE,
+                'pedido_por'                  => $usuario->id,
+                'departamento_actual_id'      => $usuario->departamento_id,
+                'departamento_solicitante_id' => $usuario->departamento_id,
+                'empresa_id'                  => $usuario->empresa_id,
+                'sucursal_id'                 => $usuario->sucursal_id,
+                'creado_por'                  => $usuario->id
             ]);
+            // Crear Detalles
             foreach ($this->items as $item) {
                 PedidoDetalle::create([
                     'pedido_id'   => $pedido->id,

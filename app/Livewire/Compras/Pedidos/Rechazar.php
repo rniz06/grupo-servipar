@@ -22,7 +22,7 @@ class Rechazar extends Component
 
     public function mount($pedido_id)
     {
-        $this->pedido = Pedido::with(['pedidoPor:id,name', 'departamento:id,departamento'])->findOrFail($pedido_id);
+        $this->pedido = Pedido::with(['pedidoPor:id,name', 'departamentoActual:id,departamento', 'departamentoSolicitante:id,departamento'])->findOrFail($pedido_id);
         $this->detalles = PedidoDetalle::select('cantidad', 'producto_id')->with(['producto:id,nombre'])->where('pedido_id', $this->pedido->id)->get();
     }
 

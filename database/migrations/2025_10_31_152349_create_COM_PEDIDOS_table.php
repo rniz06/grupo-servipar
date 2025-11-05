@@ -17,7 +17,8 @@ return new class extends Migration
             $table->date('fecha_entrega')->nullable();
             $table->enum('estado', ['PENDIENTE', 'EN PROCESO', 'APROBADO', 'RECHAZADO']);
             $table->foreignId('pedido_por')->references('id')->on('public.users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('departamento_id')->nullable()->constrained('DEPARTAMENTOS')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('departamento_actual_id')->nullable()->constrained('DEPARTAMENTOS')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('departamento_solicitante_id')->nullable()->constrained('DEPARTAMENTOS')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('empresa_id')->nullable()->constrained('EMPRESAS')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('sucursal_id')->nullable()->constrained('SUCURSALES')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('creado_por')->nullable()->references('id')->on('public.users')->cascadeOnUpdate()->cascadeOnDelete();

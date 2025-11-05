@@ -36,9 +36,14 @@ class Departamento extends Model implements Auditable
         return $this->belongsTo(Sucursal::class, 'sucursal_id');
     }
 
-    public function pedidos()
+    public function pedidosActual()
     {
-        return $this->hasMany(Pedido::class, 'departamento_id');
+        return $this->hasMany(Pedido::class, 'departamento_actual_id');
+    }
+
+    public function pedidosSolicitantes()
+    {
+        return $this->hasMany(Pedido::class, 'departamento_solicitante_id');
     }
 
     public function user()

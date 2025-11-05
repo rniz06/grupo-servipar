@@ -94,8 +94,11 @@
                     <dt class="col-md-4">Pedido Por:</dt>
                     <dd class="col-md-8">{{ $pedido->pedidoPor->name ?? 'S/D' }}</dd>
 
-                    <dt class="col-md-4">Departamento:</dt>
-                    <dd class="col-md-8">{{ $pedido->departamento->departamento ?? 'S/D' }}</dd>
+                    <dt class="col-md-4">Departamento Actual:</dt>
+                    <dd class="col-md-8">{{ $pedido->departamentoActual->departamento ?? 'S/D' }}</dd>
+
+                    <dt class="col-md-4">Departamento Solicitante:</dt>
+                    <dd class="col-md-8">{{ $pedido->departamentoSolicitante->departamento ?? 'S/D' }}</dd>
 
                     <dt class="col-md-4">Sucursal:</dt>
                     <dd class="col-md-8">{{ $pedido->sucursal->sucursal ?? 'S/D' }}</dd>

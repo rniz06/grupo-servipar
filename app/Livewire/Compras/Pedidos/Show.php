@@ -20,7 +20,7 @@ class Show extends Component
 
     public function mount($pedido_id)
     {
-        $this->pedido = Pedido::with(['pedidoPor:id,name', 'departamento:id,departamento', 'sucursal:id,sucursal'])->findOrFail($pedido_id);
+        $this->pedido = Pedido::with(['pedidoPor:id,name', 'departamentoActual:id,departamento', 'departamentoSolicitante:id,departamento', 'sucursal:id,sucursal'])->findOrFail($pedido_id);
 
         $this->anulado = PedidoRechazado::select('id', 'motivo', 'creado_por')->with(['creadoPor:id,name'])->where('pedido_id', $pedido_id)->first() ?? null;
 

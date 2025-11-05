@@ -14,7 +14,8 @@ class Index extends Component
     use WithPagination;
 
     // Propiedades de Busqueda
-    public $buscarFechaPedido = '', $buscarFechaEntrega = '', $buscarEstado = '', $buscarDepartamentoId = '', $buscarSucursalId = '';
+    public $buscarFechaPedido = '', $buscarFechaEntrega = '', $buscarEstado = '', $buscarDepartamentoActualId = '';
+    public $buscarDepartamentoSolicitanteId = '', $buscarSucursalId = '';
     public $paginado = 5;
 
     // Propiedades de Busqueda Select
@@ -34,7 +35,8 @@ class Index extends Component
             'buscarFechaPedido',
             'buscarFechaEntrega',
             'buscarEstado',
-            'buscarDepartamentoId',
+            'buscarDepartamentoActualId',
+            'buscarDepartamentoSolicitanteId',
             'buscarSucursalId',
             'paginado',
         ])) {
@@ -45,11 +47,22 @@ class Index extends Component
     public function render()
     {
         return view('livewire.compras.pedidos.index', [
-            'pedidos' => Pedido::select('id', 'fecha_pedido', 'fecha_entrega', 'estado', 'departamento_id', 'sucursal_id', 'pedido_por')
+            'pedidos' => Pedido::select(
+                'id',
+                'fecha_pedido',
+                'fecha_entrega',
+                'estado',
+                'departamento_actual_id',
+                'departamento_solicitante_id',
+                'sucursal_id',
+                'pedido_por'
+            )
                 ->buscarFechaPedido($this->buscarFechaPedido)
                 ->buscarFechaEntrega($this->buscarFechaEntrega)
                 ->buscarEstado($this->buscarEstado)
-                ->with(['departamento:id,departamento', 'sucursal:id,sucursal', 'pedidoPor:id,name'])
+                ->buscarDepartamentoActualId($this->buscarDepartamentoActualId)
+                ->buscarDepartamentoSolicitanteId($this->buscarDepartamentoSolicitanteId)
+                ->with(['departamentoActual:id,departamento', 'departamentoSolicitante:id,departamento', 'sucursal:id,sucursal', 'pedidoPor:id,name'])
                 ->paginate($this->paginado)
         ]);
     }

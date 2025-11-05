@@ -33,10 +33,21 @@
                 </x-adminlte-select>
             </th>
 
-            {{-- Departamento --}}
+            {{-- Departamento Actual --}}
             <th>
-                <x-adminlte-select name="" wire:model.live.debounce.200ms="buscarDepartamentoId"
-                    label="Departamento" igroup-size="sm">
+                <x-adminlte-select name="" wire:model.live.debounce.200ms="buscarDepartamentoActualId"
+                    label="Dep. Actual" igroup-size="sm">
+                    <option value="">-- Todos --</option>
+                    @foreach ($departamentos as $departamento)
+                        <option value="{{ $departamento->id }}">{{ $departamento->departamento ?? 'S/D' }}</option>
+                    @endforeach
+                </x-adminlte-select>
+            </th>
+
+            {{-- Departamento Solicitante --}}
+            <th>
+                <x-adminlte-select name="" wire:model.live.debounce.200ms="buscarDepartamentoSolicitanteId"
+                    label="Dep. Solicitante" igroup-size="sm">
                     <option value="">-- Todos --</option>
                     @foreach ($departamentos as $departamento)
                         <option value="{{ $departamento->id }}">{{ $departamento->departamento ?? 'S/D' }}</option>
@@ -71,7 +82,8 @@
                 <td>{{ optional($pedido->fecha_pedido)->format('d/m/Y') ?? 'S/D' }}</td>
                 <td>{{ optional($pedido->fecha_entrega)->format('d/m/Y') ?? 'S/D' }}</td>
                 <td>{{ $pedido->estado ?? 'S/D' }}</td>
-                <td>{{ $pedido->departamento->departamento ?? 'S/D' }}</td>
+                <td>{{ $pedido->departamentoActual->departamento ?? 'S/D' }}</td>
+                <td>{{ $pedido->departamentoSolicitante->departamento ?? 'S/D' }}</td>
                 <td>{{ $pedido->sucursal->sucursal ?? 'S/D' }}</td>
                 <td>{{ $pedido->pedidoPor->name ?? 'S/D' }}</td>
                 <td>

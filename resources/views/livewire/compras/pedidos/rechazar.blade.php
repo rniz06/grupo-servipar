@@ -17,7 +17,7 @@
         <div class="col-md-12 row">
             {{-- Fecha Pedido --}}
             <x-adminlte-input name label-class="text-lightblue" value="{{ $pedido->fecha_pedido->format('d/m/Y') ?? 'S/D' }}"
-                fgroup-class="col-md-4" igroup-size="sm" disabled>
+                fgroup-class="col-md-6" igroup-size="sm" disabled>
                 <x-slot name="prependSlot">
                     <div class="input-group-text">Fecha Pedido:</div>
                 </x-slot>
@@ -25,17 +25,25 @@
 
             {{-- Pedido Por --}}
             <x-adminlte-input name label-class="text-lightblue" value="{{ $pedido->pedidoPor->name ?? 'S/D' }}"
-                fgroup-class="col-md-4" igroup-size="sm" disabled>
+                fgroup-class="col-md-6" igroup-size="sm" disabled>
                 <x-slot name="prependSlot">
                     <div class="input-group-text">Pedido Por</div>
                 </x-slot>
             </x-adminlte-input>
 
-            {{-- Departamento --}}
-            <x-adminlte-input name label-class="text-lightblue" value="{{ $pedido->departamento->departamento ?? 'S/D' }}"
-                fgroup-class="col-md-4" igroup-size="sm" disabled>
+            {{-- Departamento Actual --}}
+            <x-adminlte-input name label-class="text-lightblue" value="{{ $pedido->departamentoActual->departamento ?? 'S/D' }}"
+                fgroup-class="col-md-6" igroup-size="sm" disabled>
                 <x-slot name="prependSlot">
-                    <div class="input-group-text">Departamento</div>
+                    <div class="input-group-text">Dep. Actual</div>
+                </x-slot>
+            </x-adminlte-input>
+
+            {{-- Departamento Solicitante --}}
+            <x-adminlte-input name label-class="text-lightblue" value="{{ $pedido->departamentoSolicitante->departamento ?? 'S/D' }}"
+                fgroup-class="col-md-6" igroup-size="sm" disabled>
+                <x-slot name="prependSlot">
+                    <div class="input-group-text">Dep. Solicitante</div>
                 </x-slot>
             </x-adminlte-input>
         </div>

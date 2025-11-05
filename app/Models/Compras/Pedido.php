@@ -19,7 +19,7 @@ class Pedido extends Model implements Auditable
 
     protected $table = 'compras.COM_PEDIDOS';
 
-    protected $fillable = ['fecha_pedido', 'fecha_entrega', 'estado', 'pedido_por', 'departamento_id', 'empresa_id', 'sucursal_id', 'creado_por', 'actualizado_por'];
+    protected $fillable = ['fecha_pedido', 'fecha_entrega', 'estado', 'pedido_por', 'departamento_actual_id', 'departamento_solicitante_id', 'empresa_id', 'sucursal_id', 'creado_por', 'actualizado_por'];
 
     /*
     |---------------------------------------
@@ -32,9 +32,14 @@ class Pedido extends Model implements Auditable
         return $this->belongsTo(User::class, 'pedido_por');
     }
 
-    public function departamento()
+    public function departamentoActual()
     {
-        return $this->belongsTo(Departamento::class, 'departamento_id');
+        return $this->belongsTo(Departamento::class, 'departamento_actual_id');
+    }
+
+    public function departamentoSolicitante()
+    {
+        return $this->belongsTo(Departamento::class, 'departamento_solicitante_id');
     }
 
     public function empresa()
@@ -127,13 +132,24 @@ class Pedido extends Model implements Auditable
     }
 
     /**
-     * Busqueda por campo departamento_id.
+     * Busqueda por campo departamento_actual_id.
      */
     #[Scope]
-    protected function buscarDepartamentoId(Builder $query, $search = null): void
+    protected function buscarDepartamentoActualId(Builder $query, $search = null): void
     {
         $query->when($search, function (Builder $query, string $search) {
-            $query->where('departamento_id', $search);
+            $query->where('departamento_actual_id', $search);
+        });
+    }
+
+    /**
+     * Busqueda por campo departamento_solicitante_id.
+     */
+    #[Scope]
+    protected function buscarDepartamentoSolicitanteId(Builder $query, $search = null): void
+    {
+        $query->when($search, function (Builder $query, string $search) {
+            $query->where('departamento_solicitante_id', $search);
         });
     }
 
