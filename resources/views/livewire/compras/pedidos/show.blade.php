@@ -1,5 +1,4 @@
 <div>
-
     <x-adminlte-card title="Pedido Detalles">
 
         <x-slot name="toolsSlot">
@@ -16,32 +15,6 @@
 
         <div class="row">
             <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
-                {{-- <div class="row">
-                    <div class="col-12 col-sm-4">
-                        <div class="info-box bg-light">
-                            <div class="info-box-content">
-                                <span class="info-box-text text-center text-muted">Estimated budget</span>
-                                <span class="info-box-number text-center text-muted mb-0">2300</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-4">
-                        <div class="info-box bg-light">
-                            <div class="info-box-content">
-                                <span class="info-box-text text-center text-muted">Total amount spent</span>
-                                <span class="info-box-number text-center text-muted mb-0">2000</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-4">
-                        <div class="info-box bg-light">
-                            <div class="info-box-content">
-                                <span class="info-box-text text-center text-muted">Estimated project duration</span>
-                                <span class="info-box-number text-center text-muted mb-0">20</span>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
                 <div class="row">
                     <div class="col-12">
                         <h4>Historico del Pedido</h4>
@@ -133,6 +106,7 @@
             <th>Estado</th>
             <th>Proveedor</th>
             <th>Cargado Por</th>
+            <th>Acciones</th>
         </x-slot>
 
         @forelse ($presupuestos as $presupuesto)
@@ -142,6 +116,25 @@
                 <td>{{ $presupuesto->proveedor->razon_social ?? 'S/D' }} - {{ $presupuesto->proveedor->ruc ?? 'S/D' }}
                 </td>
                 <td>{{ $presupuesto->creadoPor->name ?? 'S/D' }}</td>
+                <td>
+                    <x-tabla-dropdown>
+                        {{-- Ver Detalles --}}
+                        <x-adminlte-button label="Ver Detalles" class="dropdown-item btn-sm" icon="fas fa-eye mr-1"
+                            data-toggle="modal" data-target="#modal-ver-presupuesto-{{ $presupuesto->id }}" />
+
+                        @can('Pedidos Aprobar Presupuesto')
+                            {{-- VALIDAR QUE EL PRESUPUESTO NO ESTE APROBADO NI RECHAZADO SINO EN REVISION --}}
+                            @if ($presupuesto->estado == \App\Enums\Compras\PresupuestoEstado::ENREVISION)
+                                {{-- Boton Aprobar Presupuesto --}}
+                                <x-adminlte-button label="Aprobar Presupuesto" icon="far fa-check-circle"
+                                    class="dropdown-item btn-sm" wire:click="aprobarPresupuesto({{ $presupuesto->id }})"
+                                    wire:confirm="Estas seguro que deseas aprobar este presupuesto? Esto marcará el resto como RECHAZADO" />
+                            @endif
+                        @endcan
+                    </x-tabla-dropdown>
+                    {{-- Modal Presupuesto Ver --}}
+                    @livewire('compras.pedidos.presupuesto-ver', ['presupuesto_id' => $presupuesto->id], key($presupuesto->id))
+                </td>
             </tr>
         @empty
             <tr>

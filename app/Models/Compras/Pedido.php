@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class Pedido extends Model implements Auditable
@@ -97,6 +98,16 @@ class Pedido extends Model implements Auditable
     | LOCAL SCOPE / FILTROS DE CONSULTAS
     |---------------------------------------
     */
+
+    /**
+     * Busqueda por campo fecha_pedido.
+     */
+    #[Scope]
+    protected function filtrarPorDepartamento(Builder $query): void
+    {
+        $usuario = Auth::user();
+        $query->where('departamento_actual_id', $usuario->departamento_id);
+    }
 
     /**
      * Busqueda por campo fecha_pedido.
