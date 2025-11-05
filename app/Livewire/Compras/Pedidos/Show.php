@@ -27,7 +27,8 @@ class Show extends Component
 
         $this->items = PedidoDetalle::select('id', 'cantidad', 'producto_id')->with(['producto:id,nombre'])->where('pedido_id', $pedido_id)->get();
 
-        $this->comentarios = PedidoComentario::select('id', 'comentario', 'creado_por', 'created_at')->with(['creadoPor:id,name'])
+        $this->comentarios = PedidoComentario::select('id', 'comentario', 'creado_por', 'created_at')->where('pedido_id', $this->pedido->id)
+        ->with(['creadoPor:id,name'])
             ->orderByDesc('created_at')
             ->get();
     }

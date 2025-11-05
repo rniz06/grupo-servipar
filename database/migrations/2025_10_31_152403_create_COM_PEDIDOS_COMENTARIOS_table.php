@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('compras.COM_PEDIDOS_COMENTARIOS', function (Blueprint $table) {
             $table->id();
-            $table->string('comentario', 30);
+            $table->string('comentario', 35);
             $table->foreignId('pedido_id')->nullable()->constrained('compras.COM_PEDIDOS')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('creado_por')->nullable()->references('id')->on('public.users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('public.users')->cascadeOnUpdate()->cascadeOnDelete();

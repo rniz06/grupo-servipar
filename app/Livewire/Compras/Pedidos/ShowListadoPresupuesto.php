@@ -63,12 +63,12 @@ class ShowListadoPresupuesto extends Component
 
             PedidoComentario::create([
                 'comentario' => 'APROBO PRESUPUESTO',
-                'pedido_id' => $this->pedido->id,
+                'pedido_id' => $this->pedido_id,
                 'creado_por' => Auth::id()
             ]);
         });
 
         session()->flash('success', 'Presupuesto Aprobado correctamente.');
-        $this->redirectRoute('compras.pedidos.show', $this->pedido->id);
+        $this->redirectRoute('compras.pedidos.show', $this->pedido_id);
     }
 }

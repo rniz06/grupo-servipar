@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('compras.COM_COMPRAS', function (Blueprint $table) {
             $table->id();
             $table->date('fecha');
-            $table->string('nro_factura');
+            $table->string('nro_factura', 30);
             $table->integer('total_pagado');
             $table->enum('estado', ['FINALIZADO', 'ANULADO']);
             $table->foreignId('pedido_id')->nullable()->constrained('compras.COM_PEDIDOS')->cascadeOnUpdate()->cascadeOnDelete();

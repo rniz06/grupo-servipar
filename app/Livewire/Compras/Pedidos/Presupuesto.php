@@ -110,7 +110,7 @@ class Presupuesto extends Component
         });
 
         session()->flash('success', 'Presupuesto Agregado correctamente.');
-        $this->redirectRoute('compras.pedidos.index');
+        $this->redirectRoute('compras.pedidos.show', $this->pedido->id);
     }
 
     public function render()

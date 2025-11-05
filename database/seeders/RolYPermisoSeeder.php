@@ -84,6 +84,7 @@ class RolYPermisoSeeder extends Seeder
             ['permiso' => 'Pedidos Ver',                 'modulo_id' => 2, 'sub_modulo_id' => 3],
             ['permiso' => 'Pedidos Crear Presupuesto',   'modulo_id' => 2, 'sub_modulo_id' => 3],
             ['permiso' => 'Pedidos Aprobar Presupuesto', 'modulo_id' => 2, 'sub_modulo_id' => 3],
+            ['permiso' => 'Pedidos Cargar Factura',      'modulo_id' => 2, 'sub_modulo_id' => 3],
             ['permiso' => 'Pedidos Rechazar',            'modulo_id' => 2, 'sub_modulo_id' => 3],
             //['permiso' => 'Pedidos Exportar Excel',    'modulo_id' => 2, 'sub_modulo_id' => 3],
             //['permiso' => 'Pedidos Exportar Pdf',      'modulo_id' => 2, 'sub_modulo_id' => 3],

@@ -2,15 +2,26 @@
     <x-adminlte-card title="Pedido Detalles">
 
         <x-slot name="toolsSlot">
+            <div class="d-flex">
+                @if ($anulado == null)
+                    {{-- Boton Modal Rechazar --}}
+                    <x-adminlte-button label="Rechazar" theme="outline-secondary" class="btn-sm mr-1"
+                        icon="fas fa-store-slash" data-toggle="modal" data-target="#modal-rechazar-{{ $pedido->id }}" />
 
-            @if ($anulado == null)
-                {{-- Boton Modal Rechazar --}}
-                <x-adminlte-button label="Rechazar" theme="outline-secondary" class="btn-sm" icon="fas fa-store-slash"
-                    data-toggle="modal" data-target="#modal-rechazar-{{ $pedido->id }}" />
+                    {{-- Modal Rechazar --}}
+                    @livewire('compras.pedidos.rechazar', ['pedido_id' => $pedido->id], key($pedido->id))
+                @endif
 
-                {{-- Modal Rechazar --}}
-                @livewire('compras.pedidos.rechazar', ['pedido_id' => $pedido->id], key($pedido->id))
-            @endif
+                @can('Pedidos Cargar Factura')
+                    {{-- Boton MODAL PARA CARGAR FACTURA --}}
+                    <x-adminlte-button label="Cargar Factura" theme="outline-secondary" class="btn-sm mr-1"
+                        icon="fas fa-file-upload" data-toggle="modal"
+                        data-target="#modal-cargar-factura-{{ $pedido->id }}" />
+
+                    {{-- COMPONENTE QUE RENDERIZA MODAL PARA CARGAR FACTURA --}}
+                    @livewire('compras.pedidos.modal-cargar-factura', ['pedido_id' => $pedido->id])
+                @endcan
+            </div>
         </x-slot>
 
         <div class="row">
