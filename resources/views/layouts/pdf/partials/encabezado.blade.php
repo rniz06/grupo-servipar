@@ -5,9 +5,9 @@
             <img src="{{ $logo_izq }}" class="encabezado-logo">
         </td>
         <td style="width: 50%;">
-            <strong style="font-size: 18px; font-weight: bold;">Rubilock - Grupo Servipar</strong><br>
-            info@rubilock.com.py | rubilock.com.py<br>
-            <span style="font-weight: bold;">Contacto:</span> 0982 23 23 23<br>
+            <strong style="font-size: 18px; font-weight: bold;">Grupo Servipar S.A</strong><br>
+            info@sevipar.com | sevipar.com<br>
+            <span style="font-weight: bold;">Contacto:</span> (021) 502 292<br>
             Teniente Aguirre 1237 esq. Coronel Rivarola y Facundo Machain, Asunción, Paraguay<br>
 
             @hassection('departamento')
