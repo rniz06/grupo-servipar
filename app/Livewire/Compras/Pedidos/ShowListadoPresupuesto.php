@@ -51,16 +51,16 @@ class ShowListadoPresupuesto extends Component
             ]);
 
             // MARCAR EL RESTO DE PRESUPUESTOS DE ESTE PEDIDO COMO RECHAZADO
-            $rechazados = Presupuesto::where('pedido_id', $presupuesto->pedido_id)
-                ->where('id', '!=', $presupuesto->id)
-                ->get(['id']); // Traemos solo el campo id
+            // $rechazados = Presupuesto::where('pedido_id', $presupuesto->pedido_id)
+            //     ->where('id', '!=', $presupuesto->id)
+            //     ->get(['id']); // Traemos solo el campo id
 
-            foreach ($rechazados as $rechazado) {
-                Presupuesto::findOrFail($rechazado->id)->update([
-                    'estado'          => PresupuestoEstado::RECHAZADO,
-                    'actualizado_por' => Auth::id(),
-                ]);
-            }
+            // foreach ($rechazados as $rechazado) {
+            //     Presupuesto::findOrFail($rechazado->id)->update([
+            //         'estado'          => PresupuestoEstado::RECHAZADO,
+            //         'actualizado_por' => Auth::id(),
+            //     ]);
+            // }
 
             PedidoComentario::create([
                 'comentario' => 'APROBO PRESUPUESTO',

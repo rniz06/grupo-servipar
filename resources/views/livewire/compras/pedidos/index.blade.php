@@ -89,7 +89,7 @@
                 <td>
                     <x-tabla-dropdown>
                         @can('Pedidos Ver')
-                            <a href="{{ route('compras.pedidos.show', $pedido->id) }}" class="dropdown-item btn-sm"><i
+                            <a href="{{ route('compras.pedidos.show', $pedido->id) }}" class="dropdown-item btn-default btn-sm"><i
                                     class="far fa-eye mr-1"></i>Ver Detalles</a>
                         @endcan
 

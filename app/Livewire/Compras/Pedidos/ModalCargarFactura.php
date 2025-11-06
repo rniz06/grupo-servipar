@@ -13,38 +13,28 @@ use App\Models\Compras\PresupuestoDetalle;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class ModalCargarFactura extends Component
 {
-    public $pedido, $presupuesto, $detalles = [];
+    public $pedido, $presupuestos = [], $detalles = [];
 
-    public $fecha, $nro_factura, $total_pagado;
+    public $presupuesto_id = null, $fecha, $nro_factura, $total_pagado;
 
     public function mount($pedido_id)
     {
         $this->pedido = Pedido::findOrFail($pedido_id);
 
-        $this->presupuesto = Presupuesto::where('pedido_id', $this->pedido->id)->where('estado', PresupuestoEstado::APROBADO)->first();
-
-        if (isset($this->presupuesto)) {
-            $this->detalles = PresupuestoDetalle::where('presupuesto_id', $this->presupuesto->id)->get(['precio', 'cantidad']);
-        }
+        $this->presupuestos = Presupuesto::where('pedido_id', $this->pedido->id)->where('estado', PresupuestoEstado::APROBADO)->get();
 
         $this->fecha = Carbon::now()->format('Y-m-d');
-
-        $a = 0;
-
-        foreach ($this->detalles as $detalle) {
-            $a =  $a + ($detalle->precio * $detalle->cantidad);
-        }
-
-        $this->total_pagado = $a;
     }
 
     protected function rules()
     {
         return [
+            'presupuesto_id'=> ['required', Rule::exists(Presupuesto::class, 'id')],
             'nro_factura'   => ['required', 'max:30'],
             'total_pagado'  => ['required', 'numeric']
         ];
@@ -55,14 +45,14 @@ class ModalCargarFactura extends Component
         $this->validate();
 
         DB::transaction(function () {
-            
+
             Compra::create([
                 'fecha'          => Carbon::now()->format('Y-m-d'),
                 'nro_factura'    => $this->nro_factura ?? null,
                 'total_pagado'   => $this->total_pagado ?? null,
                 'estado'         => CompraEstado::FINALIZADO,
                 'pedido_id'      => $this->pedido->id,
-                'presupuesto_id' => $this->presupuesto->id,
+                'presupuesto_id' => $this->presupuesto_id,
                 'empresa_id'     => $this->pedido->empresa_id,
                 'sucursal_id'    => $this->pedido->sucursal_id,
                 'creado_por'     => Auth::id()
@@ -70,7 +60,7 @@ class ModalCargarFactura extends Component
 
             Pedido::findOrFail($this->pedido->id)->update([
                 'fecha_entrega'   => Carbon::now()->format('Y-m-d'),
-                'estado'          => PedidoEstado::APROBADO,
+                'estado'          => PedidoEstado::FINALIZADO,
                 'actualizado_por' => Auth::id()
             ]);
 
@@ -83,6 +73,20 @@ class ModalCargarFactura extends Component
 
         session()->flash('success', 'Pedido Finalizado correctamente.');
         $this->redirectRoute('compras.pedidos.index');
+    }
+    public function updatedPresupuestoId($value)
+    {
+        if ($value) {
+            $this->detalles = PresupuestoDetalle::where('presupuesto_id', $value)->get(['precio', 'cantidad']);
+
+            $a = 0;
+
+            foreach ($this->detalles as $detalle) {
+                $a =  $a + ($detalle->precio * $detalle->cantidad);
+            }
+
+            $this->total_pagado = $a;
+        }
     }
 
     public function render()

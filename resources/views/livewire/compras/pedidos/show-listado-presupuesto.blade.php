@@ -65,7 +65,7 @@
                                 {{-- Boton Aprobar Presupuesto --}}
                                 <x-adminlte-button label="Aprobar Presupuesto" icon="far fa-check-circle"
                                     class="dropdown-item btn-sm" wire:click="aprobarPresupuesto({{ $presupuesto->id }})"
-                                    wire:confirm="Estas seguro que deseas aprobar este presupuesto? Esto marcará el resto como RECHAZADO" />
+                                    wire:confirm="Estas seguro que deseas aprobar este presupuesto?" />
                             @endif
                         @endcan
                     </x-tabla-dropdown>

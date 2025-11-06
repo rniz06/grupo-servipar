@@ -38,8 +38,8 @@
     </div>
 
     <strong>
-        <a href="{{ config('app.company_url', '#') }}" class="text-dark">
-            {{ config('app.company_name', 'Sistema POS') }}
+        <a href="{{ config('app.company_url', 'https://rubilock.com.py/') }}" class="text-dark">
+            {{ config('app.company_name', 'Desarrolado Por Rubilock') }}
         </a>
     </strong>
 @stop
