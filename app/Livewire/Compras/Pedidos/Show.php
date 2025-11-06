@@ -56,7 +56,6 @@ class Show extends Component
         $this->redirectRoute('compras.pedidos.show', $this->pedido->id);
     }
 
-
     public function render()
     {
         return view('livewire.compras.pedidos.show');

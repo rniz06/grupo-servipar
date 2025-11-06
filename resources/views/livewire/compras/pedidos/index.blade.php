@@ -95,8 +95,8 @@
 
                         @can('Pedidos Crear Presupuesto')
                             {{-- Boton Modal Agregar Presupuesto --}}
-                            <x-adminlte-button label="Agregar Presupuesto" class="dropdown-item btn-sm" icon="fas fa-plus"
-                                data-toggle="modal" data-target="#modal-presupuesto-{{ $pedido->id }}" />
+                            {{-- <x-adminlte-button label="Agregar Presupuesto" class="dropdown-item btn-sm" icon="fas fa-plus"
+                                data-toggle="modal" data-target="#modal-presupuesto-{{ $pedido->id }}" /> --}}
                         @endcan
 
                         @can('Pedidos Rechazar')

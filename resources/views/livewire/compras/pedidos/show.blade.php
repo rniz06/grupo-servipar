@@ -24,6 +24,16 @@
                     @livewire('compras.pedidos.rechazar', ['pedido_id' => $pedido->id], key($pedido->id))
                 @endif
 
+                @if ($anulado == null)
+                    {{-- Boton Modal Rechazar --}}
+                    <x-adminlte-button label="Derivar" theme="outline-secondary" class="btn-sm mr-1"
+                        icon="fas fa-arrows-alt-v" data-toggle="modal"
+                        data-target="#modal-derivar" />
+
+                    {{-- Modal Rechazar --}}
+                    @livewire('compras.pedidos.modal-derivar', ['pedido_id' => $pedido->id], key($pedido->id))
+                @endif
+
                 @if ($pedido->estado == \App\Enums\Compras\PedidoEstado::ENPROCESO)
                     @can('Pedidos Cargar Factura')
                         {{-- Boton MODAL PARA CARGAR FACTURA --}}
