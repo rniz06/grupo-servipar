@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Compras\Pedidos;
 
+use App\Enums\Compras\PedidoEstado;
 use App\Enums\Compras\PresupuestoEstado;
 use App\Models\Compras\Pedido;
 use App\Models\Compras\PedidoComentario;
@@ -101,6 +102,11 @@ class Presupuesto extends Component
                     'creado_por'     => $usuario->id
                 ]);
             }
+
+            Pedido::findOrFail($this->pedido->id)->update([
+                'estado' => PedidoEstado::ENPROCESO,
+                'actualizado_por' => Auth::id()
+            ]);
 
             PedidoComentario::create([
                 'comentario' => "AGREGÓ PRESUPUESTO",

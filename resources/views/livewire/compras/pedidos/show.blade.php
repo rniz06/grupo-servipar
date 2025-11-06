@@ -3,24 +3,44 @@
 
         <x-slot name="toolsSlot">
             <div class="d-flex">
+
+                @if ($pedido->departamentoSolicitante->responsable_id == $usuario->id and $pedido->estado == \App\Enums\Compras\PedidoEstado::PENDIENTE)
+                    {{-- Boton Aprobar --}}
+                    <x-adminlte-button label="Aprobar" theme="outline-secondary" class="btn-sm mr-1"
+                        icon="fas fa-check-square" wire:click="aprobarPedidoSupervisor"
+                        wire:confirm="¿ESTAS SEGURO QUE DESEAS APROBAR ESTE PEDIDO?" />
+                @else
+                    <x-adminlte-button label="Aprobar" theme="outline-secondary" class="btn-sm mr-1"
+                        icon="fas fa-check-square" disabled />
+                @endif
+
                 @if ($anulado == null)
                     {{-- Boton Modal Rechazar --}}
                     <x-adminlte-button label="Rechazar" theme="outline-secondary" class="btn-sm mr-1"
-                        icon="fas fa-store-slash" data-toggle="modal" data-target="#modal-rechazar-{{ $pedido->id }}" />
+                        icon="fas fa-store-slash" data-toggle="modal"
+                        data-target="#modal-rechazar-{{ $pedido->id }}" />
 
                     {{-- Modal Rechazar --}}
                     @livewire('compras.pedidos.rechazar', ['pedido_id' => $pedido->id], key($pedido->id))
                 @endif
 
-                @can('Pedidos Cargar Factura')
-                    {{-- Boton MODAL PARA CARGAR FACTURA --}}
-                    <x-adminlte-button label="Cargar Factura" theme="outline-secondary" class="btn-sm mr-1"
-                        icon="fas fa-file-upload" data-toggle="modal"
-                        data-target="#modal-cargar-factura-{{ $pedido->id }}" />
+                @if ($pedido->estado == \App\Enums\Compras\PedidoEstado::ENPROCESO)
+                    @can('Pedidos Cargar Factura')
+                        {{-- Boton MODAL PARA CARGAR FACTURA --}}
+                        <x-adminlte-button label="Cargar Factura" theme="outline-secondary" class="btn-sm mr-1"
+                            icon="fas fa-file-upload" data-toggle="modal"
+                            data-target="#modal-cargar-factura-{{ $pedido->id }}" />
 
-                    {{-- COMPONENTE QUE RENDERIZA MODAL PARA CARGAR FACTURA --}}
-                    @livewire('compras.pedidos.modal-cargar-factura', ['pedido_id' => $pedido->id])
-                @endcan
+                        {{-- COMPONENTE QUE RENDERIZA MODAL PARA CARGAR FACTURA --}}
+                        @livewire('compras.pedidos.modal-cargar-factura', ['pedido_id' => $pedido->id])
+                    @endcan
+                @else
+                    @can('Pedidos Cargar Factura')
+                        {{-- MOSTRAR BOTON DESHABILITADO --}}
+                        <x-adminlte-button label="Cargar Factura" theme="outline-secondary" class="btn-sm mr-1"
+                            icon="fas fa-file-upload" disabled />
+                    @endcan
+                @endif
             </div>
         </x-slot>
 

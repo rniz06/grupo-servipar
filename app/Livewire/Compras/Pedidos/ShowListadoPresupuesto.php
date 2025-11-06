@@ -3,6 +3,7 @@
 namespace App\Livewire\Compras\Pedidos;
 
 use App\Enums\Compras\PresupuestoEstado;
+use App\Models\Compras\Pedido;
 use App\Models\Compras\PedidoComentario;
 use App\Models\Compras\Presupuesto;
 use Illuminate\Support\Facades\Auth;
@@ -11,12 +12,12 @@ use Livewire\Component;
 
 class ShowListadoPresupuesto extends Component
 {
-    public $pedido_id;
+    public $pedido;
     public $paginado = 5;
 
     public function mount($pedido_id)
     {
-        $this->pedido_id = $pedido_id;
+        $this->pedido = Pedido::findOrFail($pedido_id);
     }
 
     // Limpiar el buscador y la paginación al cambiar de pagina
@@ -33,7 +34,7 @@ class ShowListadoPresupuesto extends Component
     {
         return view('livewire.compras.pedidos.show-listado-presupuesto', [
             'presupuestos' => Presupuesto::select('id', 'fecha', 'estado', 'proveedor_id', 'creado_por')
-                ->where('pedido_id', $this->pedido_id)
+                ->where('pedido_id', $this->pedido->id)
                 ->with(['proveedor:id,razon_social,ruc', 'creadoPor:id,name'])->paginate($this->paginado, ['*'], 'presupuestos_page')
         ]);
     }
@@ -63,12 +64,12 @@ class ShowListadoPresupuesto extends Component
 
             PedidoComentario::create([
                 'comentario' => 'APROBO PRESUPUESTO',
-                'pedido_id' => $this->pedido_id,
+                'pedido_id' => $this->pedido->id,
                 'creado_por' => Auth::id()
             ]);
         });
 
         session()->flash('success', 'Presupuesto Aprobado correctamente.');
-        $this->redirectRoute('compras.pedidos.show', $this->pedido_id);
+        $this->redirectRoute('compras.pedidos.show', $this->pedido->id);
     }
 }

@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => '<b>Grupo</b>Servipar',
-    'logo_img' => 'img/logos/servipar-escudo.webp',
+    'logo_img' => 'img/logos/grupo-servipar.webp',
     // 'logo_img' => 'img/logos/servipar-escudo.webp',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -87,7 +87,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'img/logos/logo-rubilock-grupo-sevipar.webp',
+            'path' => 'img/logos/grupo-servipar.webp',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
@@ -114,7 +114,7 @@ return [
         'enabled' => true,
         'mode' => 'fullscreen',
         'img' => [
-            'path' => 'img/logos/servipar-escudo.webp',
+            'path' => 'img/logos/grupo-servipar.webp',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
             'width' => 60,

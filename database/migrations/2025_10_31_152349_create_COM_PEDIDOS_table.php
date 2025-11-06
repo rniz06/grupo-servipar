@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('fecha_pedido');
             $table->date('fecha_entrega')->nullable();
-            $table->enum('estado', ['PENDIENTE', 'EN PROCESO', 'APROBADO', 'RECHAZADO']);
+            $table->enum('estado', ['PENDIENTE', 'APROBADO SUPERVISOR', 'EN PROCESO', 'FINALIZADO', 'RECHAZADO']);
             $table->foreignId('pedido_por')->references('id')->on('public.users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('departamento_actual_id')->nullable()->constrained('DEPARTAMENTOS')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('departamento_solicitante_id')->nullable()->constrained('DEPARTAMENTOS')->cascadeOnUpdate()->cascadeOnDelete();

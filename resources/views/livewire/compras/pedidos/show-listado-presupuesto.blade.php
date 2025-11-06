@@ -1,13 +1,43 @@
 <div>
     <x-tabla titulo="Listado de Presupuestos">
 
-        <x-slot name="headerBotones">
-            {{-- Boton Modal Agregar Presupuesto --}}
-            <x-adminlte-button label="Agregar Presupuesto" theme="outline-success" icon="fas fa-plus" class="btn-sm"
-                data-toggle="modal" data-target="#modal-presupuesto-{{ $pedido_id }}" />
-            {{-- Modal Agregar Presupuesto --}}
-            @livewire('compras.pedidos.presupuesto', ['pedido_id' => $pedido_id], key($pedido_id))
-        </x-slot>
+        {{-- VERIFICAR QUE EL PEDIDO ESTA EN CONDICION PARA AGREGAR PRESUPUESTO (APROBADO POR EL SUPERVISOR O EN PROCESO) --}}
+        @if (
+            $pedido->estado == \App\Enums\Compras\PedidoEstado::APROBADOSUPERVISOR ||
+                $pedido->estado == \App\Enums\Compras\PedidoEstado::ENPROCESO)
+            <x-slot name="headerBotones">
+                @can('Pedidos Crear Presupuesto')
+                    {{-- Boton Modal Agregar Presupuesto --}}
+                    <x-adminlte-button label="Agregar Presupuesto" theme="outline-success" icon="fas fa-plus" class="btn-sm"
+                        data-toggle="modal" data-target="#modal-presupuesto-{{ $pedido->id }}" />
+                    {{-- Modal Agregar Presupuesto --}}
+                    @livewire('compras.pedidos.presupuesto', ['pedido_id' => $pedido->id], key($pedido->id))
+                @endcan
+            </x-slot>
+        @endif
+
+        @if (
+            $pedido->estado == \App\Enums\Compras\PedidoEstado::APROBADOSUPERVISOR ||
+                $pedido->estado == \App\Enums\Compras\PedidoEstado::ENPROCESO)
+            <x-slot name="headerBotones">
+                @can('Pedidos Crear Presupuesto')
+                    {{-- Boton Modal Agregar Presupuesto --}}
+                    <x-adminlte-button label="Agregar Presupuesto" theme="outline-success" icon="fas fa-plus" class="btn-sm"
+                        data-toggle="modal" data-target="#modal-presupuesto-{{ $pedido->id }}" />
+                    {{-- Modal Agregar Presupuesto --}}
+                    @livewire('compras.pedidos.presupuesto', ['pedido_id' => $pedido->id], key($pedido->id))
+                @endcan
+            </x-slot>
+        @else
+            {{-- MOSTRAR BOTON DESHABILITADO --}}
+            <x-slot name="headerBotones">
+                @can('Pedidos Crear Presupuesto')
+                    <x-adminlte-button label="Agregar Presupuesto" theme="outline-success" icon="fas fa-plus" class="btn-sm"
+                        disabled />
+                @endcan
+            </x-slot>
+        @endif
+
         <x-slot name="cabeceras">
             <th>Fecha Presupuesto</th>
             <th>Estado</th>

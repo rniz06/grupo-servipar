@@ -106,7 +106,7 @@ class Pedido extends Model implements Auditable
     protected function filtrarSinRolEspecifico(Builder $query): void
     {
         $usuario = Auth::user();
-        if (! $usuario->hasAnyRole(['Compras', 'SuperAdmin'])) {
+        if (! $usuario->hasAnyRole(['COMPRAS', 'SuperAdmin'])) {
             $query->where('departamento_solicitante_id', $usuario->departamento_id);
         }
     }
