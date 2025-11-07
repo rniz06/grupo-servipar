@@ -3,12 +3,12 @@
 namespace App\Livewire\Cda\IngresoVehiculo;
 
 use App\Models\Acceso;
-use App\Models\Cda\Color;
-use App\Models\Cda\IngresoVehiculo;
-use App\Models\Cda\Marca;
-use App\Models\Cda\Modelo;
-use App\Models\Cda\Persona;
-use App\Models\Cda\Vehiculo;
+use App\Models\Cda\{Color, IngresoVehiculo, Marca, Modelo, Persona, Vehiculo};
+// use App\Models\Cda\IngresoVehiculo;
+// use App\Models\Cda\Marca;
+// use App\Models\Cda\Modelo;
+// use App\Models\Cda\Persona;
+// use App\Models\Cda\Vehiculo;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -16,66 +16,62 @@ use Livewire\Component;
 
 class Ingreso extends Component
 {
-    /*
-    |---------------------------------------
-    | pi: persona ingresa
-    |---------------------------------------
-    */
-
+    // Datos del ingreso
     public $vehiculo_id, $persona_ingresa_id, $persona_visita_id, $acceso_ingreso_id;
 
-    public $chapa, $marca_id, $modelo_id, $color_id; // PROPIEDADES DEL VEHICULO
+    // Datos del vehículo
+    public $chapa, $marca_id, $modelo_id, $color_id;
 
-    public $pi_nombre_completo, $pi_nro_cedula; // PROPIEDADES DE LA PERSONA QUE INGRESA
+    // Datos de la persona que ingresa
+    public $pi_nombre_completo, $pi_nro_cedula;
 
-    public $marcas, $modelos, $colores, $personasVisitables, $accesos; // PROPIEDADES PARA LOS SELECT
+    // Opciones para selects
+    public $marcas, $modelos, $colores, $personasVisitables, $accesos;
 
-    public $bloqueoFormVehiculo = true, $bloqueoFormPerIngresa = true;
+    // Bloqueos de formularios
+    public $bloqueoFormVehiculo = true;
+    public $bloqueoFormPerIngresa = true;
 
     public function mount()
     {
-        $this->marcas = Marca::select('id', 'marca')->orderBy('marca')->get();
-
-        $this->modelos = Modelo::select('id', 'modelo', 'marca_id')->orderBy('modelo')->get();
-
-        $this->colores = Color::select('id', 'color')->orderBy('color')->get();
-
-        $this->personasVisitables = Persona::select('id', 'nombre_completo')->where('esPersonalEmpresa', true)->orderBy('nombre_completo')->get();
-
-        $this->accesos = Acceso::select('id', 'acceso')->orderBy('acceso')->get();
+        // Carga inicial optimizada: solo columnas necesarias, ordenadas
+        $this->marcas = Marca::orderBy('marca')->get(['id', 'marca']);
+        $this->modelos = Modelo::orderBy('modelo')->get(['id', 'modelo', 'marca_id']);
+        $this->colores = Color::orderBy('color')->get(['id', 'color']);
+        $this->personasVisitables = Persona::where('esPersonalEmpresa', true)
+            ->orderBy('nombre_completo')
+            ->get(['id', 'nombre_completo']);
+        $this->accesos = Acceso::orderBy('acceso')->get(['id', 'acceso']);
     }
 
     protected function rules()
     {
         return [
-            'chapa'     => ['required', 'min:6', 'max:10'],
-            'marca_id'  => ['required', Rule::exists(Marca::class, 'id')],
-            'modelo_id' => ['required', Rule::exists(Modelo::class, 'id')],
-            'color_id'  => ['required', Rule::exists(Color::class, 'id')],
-            'pi_nro_cedula' => ['required', 'min:6', 'max:15'],
-            'pi_nombre_completo' => ['required', 'string'],
-            'persona_visita_id'  => ['required', Rule::exists(Persona::class, 'id')],
-            'acceso_ingreso_id'  => ['required', Rule::exists(Acceso::class, 'id')],
+            'chapa'               => ['required', 'string', 'min:6', 'max:10'],
+            'marca_id'            => ['required', Rule::exists(Marca::class, 'id')],
+            'modelo_id'           => ['required', Rule::exists(Modelo::class, 'id')],
+            'color_id'            => ['required', Rule::exists(Color::class, 'id')],
+            'pi_nro_cedula'       => ['required', 'string', 'min:6', 'max:15'],
+            'pi_nombre_completo'  => ['required', 'string'],
+            'persona_visita_id'   => ['required', Rule::exists(Persona::class, 'id')],
+            'acceso_ingreso_id'   => ['required', Rule::exists(Acceso::class, 'id')],
         ];
     }
 
+    /** ─────────────────────────────────────────────
+     *  Eventos de actualización
+     * ────────────────────────────────────────────── */
     public function updatedChapa($value)
     {
-        $this->bloqueoFormVehiculo = true;
-        $this->marca_id  = '';
-        $this->modelo_id = '';
-        $this->color_id  = '';
+        $this->resetVehiculoForm();
 
-        $vehiculo = Vehiculo::select('id', 'chapa', 'marca_id', 'modelo_id', 'color_id')
-            ->with(['marca:id,marca', 'modelo:id,modelo', 'color:id,color'])
+        $vehiculo = Vehiculo::with(['marca:id,marca', 'modelo:id,modelo', 'color:id,color'])
+            ->select('id', 'marca_id', 'modelo_id', 'color_id')
             ->where('chapa', $value)
             ->first();
 
         if ($vehiculo) {
-            $this->vehiculo_id  = $vehiculo->id;
-            $this->marca_id     = $vehiculo->marca_id;
-            $this->modelo_id    = $vehiculo->modelo_id;
-            $this->color_id     = $vehiculo->color_id;
+            $this->fillVehiculo($vehiculo);
         } else {
             $this->bloqueoFormVehiculo = false;
         }
@@ -84,62 +80,90 @@ class Ingreso extends Component
     public function updatedMarcaId($value)
     {
         $this->modelo_id = '';
-
-        $this->modelos = Modelo::select('id', 'modelo', 'marca_id')->where('marca_id', $value)->orderBy('modelo')->get();
+        $this->modelos = Modelo::where('marca_id', $value)
+            ->orderBy('modelo')
+            ->get(['id', 'modelo', 'marca_id']);
     }
 
     public function updatedPiNroCedula($value)
     {
-        $this->bloqueoFormPerIngresa = true;
-        $this->pi_nombre_completo    = '';
+        $this->resetPersonaForm();
 
-        $persona = Persona::select('id', 'nombre_completo', 'nro_cedula')->where('nro_cedula', $value)->first();
+        $persona = Persona::select('id', 'nombre_completo', 'nro_cedula')
+            ->where('nro_cedula', $value)
+            ->first();
 
         if ($persona) {
-            $this->pi_nombre_completo = $persona->nombre_completo;
-            $this->persona_ingresa_id = $persona->id;
+            $this->fillPersona($persona);
         } else {
             $this->bloqueoFormPerIngresa = false;
         }
     }
 
+    /** ─────────────────────────────────────────────
+     *  Métodos auxiliares (limpieza y relleno)
+     * ────────────────────────────────────────────── */
+    private function resetVehiculoForm()
+    {
+        $this->bloqueoFormVehiculo = true;
+        $this->marca_id = $this->modelo_id = $this->color_id = '';
+        $this->vehiculo_id = null;
+    }
+
+    private function fillVehiculo($vehiculo)
+    {
+        $this->vehiculo_id = $vehiculo->id;
+        $this->marca_id    = $vehiculo->marca_id;
+        $this->modelo_id   = $vehiculo->modelo_id;
+        $this->color_id    = $vehiculo->color_id;
+    }
+
+    private function resetPersonaForm()
+    {
+        $this->bloqueoFormPerIngresa = true;
+        $this->pi_nombre_completo = '';
+        $this->persona_ingresa_id = null;
+    }
+
+    private function fillPersona($persona)
+    {
+        $this->pi_nombre_completo = $persona->nombre_completo;
+        $this->persona_ingresa_id = $persona->id;
+    }
+
+    /** ────────────────────────────────────────────
+     *  Registro de ingreso
+     * ────────────────────────────────────────────── */
     public function grabar()
     {
         $this->validate();
 
-        // SI EL VEHICULO NO EXISTE LO CREAMOS
-        if ($this->vehiculo_id == null) {
-            $vehiculo = Vehiculo::create([
-                'chapa'      => $this->chapa,
-                'marca_id'   => $this->marca_id,
-                'modelo_id'  => $this->modelo_id,
-                'color_id'   => $this->color_id,
-                'creado_por' => Auth::id()
-            ]);
-            $this->vehiculo_id = $vehiculo->id;
-        }
+        $this->vehiculo_id = $this->vehiculo_id ?: Vehiculo::create([
+            'chapa'      => $this->chapa,
+            'marca_id'   => $this->marca_id,
+            'modelo_id'  => $this->modelo_id,
+            'color_id'   => $this->color_id,
+            'creado_por' => Auth::id(),
+        ])->id;
 
-        if ($this->persona_ingresa_id == null) {
-            $persona = Persona::create([
-                'nombre_completo' => $this->pi_nombre_completo,
-                'nro_cedula'      => $this->pi_nro_cedula,
-                'creado_por'      => Auth::id()
-            ]);
-            $this->persona_ingresa_id = $persona->id;
-        }
+        $this->persona_ingresa_id = $this->persona_ingresa_id ?: Persona::create([
+            'nombre_completo' => $this->pi_nombre_completo,
+            'nro_cedula'      => $this->pi_nro_cedula,
+            'creado_por'      => Auth::id(),
+        ])->id;
 
         IngresoVehiculo::create([
-            'fecha_hora_ingreso'       => Carbon::now(),
+            'fecha_hora_ingreso'       => now(),
             'vehiculo_id'              => $this->vehiculo_id,
             'persona_ingresa_id'       => $this->persona_ingresa_id,
             'persona_visita_id'        => $this->persona_visita_id,
             'acceso_ingreso_id'        => $this->acceso_ingreso_id,
             'usuario_registro_ingreso' => Auth::id(),
-            'creado_por'               => Auth::id()
+            'creado_por'               => Auth::id(),
         ]);
 
-        session()->flash('success', 'Ingreso Registrado.');
-        $this->redirectRoute('cda.panel-central.index');
+        session()->flash('success', 'Ingreso registrado correctamente.');
+        return redirect()->route('cda.panel-central.index');
     }
 
     public function render()
