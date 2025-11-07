@@ -1,23 +1,19 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Cda;
 
-use App\Models\Cda\IngresoVehiculo;
-use App\Models\Cda\Persona;
-use App\Models\Compras\Compra;
-use App\Models\Compras\Pedido;
-use App\Models\Productos\Stock;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class Empresa extends Model implements Auditable
+class Color extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable, SoftDeletes;
 
-    protected $table = 'EMPRESAS';
+    protected $table = 'control_acceso,CDA_COLORES';
 
-    protected $fillable = ['empresa', 'razon_social', 'ruc', 'correo', 'direccion', 'telefono', 'creado_por', 'actualizado_por'];
+    protected $fillable = ['color', 'creado_por', 'actualizado_por'];
 
     /*
     |---------------------------------------
@@ -25,19 +21,9 @@ class Empresa extends Model implements Auditable
     |---------------------------------------
     */
 
-    public function personas()
+    public function vehiculos()
     {
-        return $this->hasMany(Persona::class, 'empresa_id');
-    }
-
-    public function accesos()
-    {
-        return $this->hasMany(Acceso::class, 'empresa_id');
-    }
-
-    public function ingresos()
-    {
-        return $this->hasMany(IngresoVehiculo::class, 'empresa_id');
+        return $this->hasMany(Vehiculo::class, 'color_id');
     }
 
     /*

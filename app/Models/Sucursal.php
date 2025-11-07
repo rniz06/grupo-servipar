@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Cda\IngresoVehiculo;
+use App\Models\Cda\Persona;
 use App\Models\Compras\Compra;
 use App\Models\Compras\Pedido;
 use App\Models\Productos\Stock;
@@ -38,24 +40,19 @@ class Sucursal extends Model implements Auditable
         return $this->hasMany(Departamento::class, 'sucursal_id');
     }
 
-    public function pedidos()
+    public function personas()
     {
-        return $this->hasMany(Pedido::class, 'empresa_id');
+        return $this->hasMany(Persona::class, 'sucursal_id');
     }
 
-    public function compras()
+    public function accesos()
     {
-        return $this->hasMany(Compra::class, 'sucursal_id');
+        return $this->hasMany(Acceso::class, 'sucursal_id');
     }
 
-    public function stock()
+    public function ingresos()
     {
-        return $this->hasMany(Stock::class, 'sucursal_id');
-    }
-
-    public function user()
-    {
-        return $this->hasMany(User::class, 'sucursal_id');
+        return $this->hasMany(IngresoVehiculo::class, 'sucursal_id');
     }
 
     /*

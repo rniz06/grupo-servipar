@@ -31,7 +31,7 @@ return new class extends Migration
             $table->boolean('corresponde_salida')->nullable()->comment('CAMPO PARA MARCAR SI NO SE REGISTRO LA SALIDA DE LA PERSONA/VEHICULO');
             $table->foreignId('empresa_id')->nullable()->constrained('EMPRESAS')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('sucursal_id')->nullable()->constrained('SUCURSALES')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('acceso_id')->nullable()->constrained('ACCESOS')->cascadeOnUpdate()->cascadeOnDelete();
+            //$table->foreignId('acceso_id')->nullable()->constrained('ACCESOS')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('creado_por')->nullable()->references('id')->on('public.users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('public.users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
