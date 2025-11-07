@@ -14,7 +14,7 @@ class IngresoVehiculo extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable, SoftDeletes;
 
-    protected $table = 'control_acceso,CDA_INGRESO_VEHICULOS';
+    protected $table = 'control_acceso.CDA_INGRESO_VEHICULOS';
 
     protected $fillable = [
         'fecha_hora_ingreso',

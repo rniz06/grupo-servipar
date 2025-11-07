@@ -20,13 +20,17 @@ class DatabaseSeeder extends Seeder
             EmpresaSeeder::class,
             SucursalSeeder::class,
             AccesoSeeder::class,
-            ImpuestoSeeder::class,
+            MarcayModeloSeeder::class,
+            ColorSeeder::class,
+            PersonaSeeder::class,
+            VehiculoSeeder::class,
+            //ImpuestoSeeder::class,
             //SysModuloSeeder::class,
             //SysSubModuloSeeder::class,
             DepartamentoSeeder::class,
-            DepositoSeeder::class,
-            ProductoCategoriaSeeder::class,
-            ProductoSeeder::class
+            //DepositoSeeder::class,
+            //ProductoCategoriaSeeder::class,
+            //ProductoSeeder::class
         ]);
     }
 }

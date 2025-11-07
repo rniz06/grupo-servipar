@@ -11,7 +11,7 @@ class Marca extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable, SoftDeletes;
 
-    protected $table = 'control_acceso,CDA_MARCAS';
+    protected $table = 'control_acceso.CDA_MARCAS';
 
     protected $fillable = ['marca', 'creado_por', 'actualizado_por'];
 

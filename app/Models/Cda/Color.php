@@ -11,7 +11,7 @@ class Color extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable, SoftDeletes;
 
-    protected $table = 'control_acceso,CDA_COLORES';
+    protected $table = 'control_acceso.CDA_COLORES';
 
     protected $fillable = ['color', 'creado_por', 'actualizado_por'];
 

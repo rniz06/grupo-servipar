@@ -9,7 +9,7 @@
 {{-- Content body: main page content --}}
 
 @section('content_body')
-    HOLA DESDE VEHICULO INGRESO
+    @livewire('cda.ingreso-vehiculo.ingreso')
 @stop
 
 @push('css')

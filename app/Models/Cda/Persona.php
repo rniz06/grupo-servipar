@@ -13,7 +13,7 @@ class Persona extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable, SoftDeletes;
 
-    protected $table = 'control_acceso,CDA_PERSONAS';
+    protected $table = 'control_acceso.CDA_PERSONAS';
 
     protected $fillable = ['nombre_completo', 'nro_cedula', 'nro_celular', 'esPersonalEmpresa', 'empresa_id', 'sucursal_id', 'creado_por', 'actualizado_por'];
 

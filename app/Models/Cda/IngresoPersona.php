@@ -14,7 +14,7 @@ class IngresoPersona extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable, SoftDeletes;
 
-    protected $table = 'control_acceso,CDA_INGRESO_PERSONAS';
+    protected $table = 'control_acceso.CDA_INGRESO_PERSONAS';
 
     protected $fillable = [
         'fecha_hora_ingreso',

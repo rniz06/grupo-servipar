@@ -11,7 +11,7 @@ class Vehiculo extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable, SoftDeletes;
 
-    protected $table = 'control_acceso,CDA_VEHICULOS';
+    protected $table = 'control_acceso.CDA_VEHICULOS';
 
     protected $fillable = ['chapa', 'marca_id', 'modelo_id', 'color_id', 'creado_por', 'actualizado_por'];
 
