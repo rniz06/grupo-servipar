@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             CiudadSeeder::class,
             EmpresaSeeder::class,
             SucursalSeeder::class,
+            AccesoSeeder::class,
             ImpuestoSeeder::class,
             //SysModuloSeeder::class,
             //SysSubModuloSeeder::class,
