@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Grupo Servipar',
+    'title' => 'Grupo Sevipar',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Grupo</b>Servipar',
+    'logo' => '<b>Grupo</b>Sevipar',
     //'logo_img' => 'img/logos/grupo-servipar.webp',
     'logo_img' => 'img/logos/servipar-escudo.webp',
     'logo_img_class' => 'brand-image img-circle elevation-3',
@@ -334,27 +334,38 @@ return [
             ],
         ],
         [
-            'text' => 'Compras',
-            'icon' => 'fas fa-shopping-cart',
+            'text' => 'Control de Acceso',
+            'icon' => 'fas fa-user-edit',
             'submenu' => [
                 [
-                    'text' => 'Listar Pedidos',
-                    'route' => 'compras.pedidos.index',
-                    'can' => 'Pedidos Listar',
-                ],
-                [
-                    'text' => 'Añadir Pedido',
-                    'route' => 'compras.pedidos.create',
-                    'can' => 'Pedidos Crear',
-                ],
-
-                [
-                    'text' => 'Listar Proveedores',
-                    'route' => 'compras.proveedores.index',
-                    'can' => 'Proveedores Listar',
+                    'text' => 'Panel Central',
+                    'route' => 'cda.panel-central.index',
+                    'can' => 'Panel Central',
                 ],
             ],
         ],
+        // [
+        //     'text' => 'Compras',
+        //     'icon' => 'fas fa-shopping-cart',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Listar Pedidos',
+        //             'route' => 'compras.pedidos.index',
+        //             'can' => 'Pedidos Listar',
+        //         ],
+        //         [
+        //             'text' => 'Añadir Pedido',
+        //             'route' => 'compras.pedidos.create',
+        //             'can' => 'Pedidos Crear',
+        //         ],
+
+        //         [
+        //             'text' => 'Listar Proveedores',
+        //             'route' => 'compras.proveedores.index',
+        //             'can' => 'Proveedores Listar',
+        //         ],
+        //     ],
+        // ],
         // [
         //     'text' => 'blog',
         //     'url' => 'admin/blog',
