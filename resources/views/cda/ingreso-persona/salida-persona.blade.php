@@ -2,9 +2,9 @@
 
 {{-- Customize layout sections --}}
 
-@section('subtitle', 'Inicio')
-@section('content_header_title', 'Inicio')
-@section('content_header_subtitle', 'Bienvenido')
+@section('subtitle', 'Persona')
+@section('content_header_title', 'Persona')
+@section('content_header_subtitle', 'Salida')
 
 {{-- Content body: main page content --}}
 
