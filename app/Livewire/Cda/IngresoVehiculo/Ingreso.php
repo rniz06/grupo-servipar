@@ -4,6 +4,7 @@ namespace App\Livewire\Cda\IngresoVehiculo;
 
 use App\Models\Acceso;
 use App\Models\Cda\{Color, IngresoVehiculo, Marca, Modelo, Persona, Vehiculo};
+use App\Services\Cda\Validaciones\IngresoVehiculoService;
 // use App\Models\Cda\IngresoVehiculo;
 // use App\Models\Cda\Marca;
 // use App\Models\Cda\Modelo;
@@ -11,6 +12,7 @@ use App\Models\Cda\{Color, IngresoVehiculo, Marca, Modelo, Persona, Vehiculo};
 // use App\Models\Cda\Vehiculo;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 
@@ -138,29 +140,39 @@ class Ingreso extends Component
     {
         $this->validate();
 
-        $this->vehiculo_id = $this->vehiculo_id ?: Vehiculo::create([
-            'chapa'      => $this->chapa,
-            'marca_id'   => $this->marca_id,
-            'modelo_id'  => $this->modelo_id,
-            'color_id'   => $this->color_id,
-            'creado_por' => Auth::id(),
-        ])->id;
+        # VALIDAR SI EL VEHICULO INGRESO ANTERIORMEMTE Y REGISTRO SALIDA, SINO LANZAR ALERTA
+        if (IngresoVehiculoService::tieneIngresoPendiente($this->chapa)) {
+            $this->addError('chapa', 'Este vehículo registra un ingreso sin salida registrada.');
+            return;
+        }
 
-        $this->persona_ingresa_id = $this->persona_ingresa_id ?: Persona::create([
-            'nombre_completo' => $this->pi_nombre_completo,
-            'nro_cedula'      => $this->pi_nro_cedula,
-            'creado_por'      => Auth::id(),
-        ])->id;
+        DB::transaction(function () {
+            $this->vehiculo_id = $this->vehiculo_id ?: Vehiculo::create([
+                'chapa'      => $this->chapa,
+                'marca_id'   => $this->marca_id,
+                'modelo_id'  => $this->modelo_id,
+                'color_id'   => $this->color_id,
+                'creado_por' => Auth::id(),
+            ])->id;
 
-        IngresoVehiculo::create([
-            'fecha_hora_ingreso'       => now(),
-            'vehiculo_id'              => $this->vehiculo_id,
-            'persona_ingresa_id'       => $this->persona_ingresa_id,
-            'persona_visita_id'        => $this->persona_visita_id,
-            'acceso_ingreso_id'        => $this->acceso_ingreso_id,
-            'usuario_registro_ingreso' => Auth::id(),
-            'creado_por'               => Auth::id(),
-        ]);
+            $this->persona_ingresa_id = $this->persona_ingresa_id ?: Persona::create([
+                'nombre_completo' => $this->pi_nombre_completo,
+                'nro_cedula'      => $this->pi_nro_cedula,
+                'creado_por'      => Auth::id(),
+            ])->id;
+
+            IngresoVehiculo::create([
+                'fecha_hora_ingreso'       => now(),
+                'vehiculo_id'              => $this->vehiculo_id,
+                'persona_ingresa_id'       => $this->persona_ingresa_id,
+                'persona_visita_id'        => $this->persona_visita_id,
+                'acceso_ingreso_id'        => $this->acceso_ingreso_id,
+                'usuario_registro_ingreso' => Auth::id(),
+                'creado_por'               => Auth::id(),
+            ]);
+        });
+
+
 
         session()->flash('success', 'Ingreso registrado correctamente.');
         return redirect()->route('cda.panel-central.index');
