@@ -6,6 +6,7 @@ use App\Models\Acceso;
 use App\Models\Cda\IngresoVehiculo;
 use App\Models\Cda\Persona;
 use App\Models\Cda\Vehiculo;
+use App\Services\Cda\Validaciones\IngresoVehiculoService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
@@ -40,12 +41,18 @@ class Salida extends Component
      * ────────────────────────────────────────────── */
     public function updatedChapa($value)
     {
+        # VALIDACION SI NO SE ENCUENTRA UNA ENTRADA DE ESE VEHICULO
+        if (IngresoVehiculoService::intentaSalirSinIngreso($this->chapa)) {
+            $this->addError('chapa', 'Vehiculo No Registra Entrada.');
+            return;
+        }
+
         $this->resetVehiculoForm();
 
         $this->registro = IngresoVehiculo::with(['vehiculo', 'personaIngreso'])
             ->whereHas('vehiculo', function (Builder $query) use ($value) {
                 $query->where('chapa', $value);
-            })->first();
+            })->orderByDesc('created_at')->whereNull('fecha_hora_salida')->first();
     }
 
     /** ─────────────────────────────────────────────
@@ -64,7 +71,7 @@ class Salida extends Component
         
         $this->validate();
 
-        // AGREGAR VALIDACION SI NO SE ENCUENTRA UNA ENTRADA DE ESE VEHICULO Y FILTRAR SOLO POR LOS PENDIENTES DE SALIDA
+        // AGREGAR Y FILTRAR SOLO POR LOS PENDIENTES DE SALIDA        
         
         $this->registro->update([
             'fecha_hora_salida'       => Carbon::now(),

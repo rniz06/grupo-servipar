@@ -141,7 +141,7 @@ class Ingreso extends Component
         $this->validate();
 
         # VALIDAR SI EL VEHICULO INGRESO ANTERIORMEMTE Y REGISTRO SALIDA, SINO LANZAR ALERTA
-        if (IngresoVehiculoService::tieneIngresoPendiente($this->chapa)) {
+        if (IngresoVehiculoService::tieneSalidaPendiente($this->chapa)) {
             $this->addError('chapa', 'Este vehículo registra un ingreso sin salida registrada.');
             return;
         }

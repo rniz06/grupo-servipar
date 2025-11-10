@@ -16,12 +16,12 @@ class IngresoVehiculoService
     }
 
     /**
-     * Verifica si un vehículo con la chapa dada tiene un ingreso pendiente (sin salida).
+     * Verifica si un vehículo con la chapa dada tiene un ingreso sin salida.
      *
      * @param string $chapa
      * @return bool
      */
-    public static function tieneIngresoPendiente(string $chapa): bool
+    public static function tieneSalidaPendiente(string $chapa): bool
     {
         $vehiculo = Vehiculo::where('chapa', $chapa)->first();
 
@@ -35,5 +35,32 @@ class IngresoVehiculoService
         return IngresoVehiculo::where('vehiculo_id', $vehiculo->id)
             ->whereNull('fecha_hora_salida')
             ->exists();
+    }
+
+    /**
+     * Verifica si un vehículo con la chapa dada intenta registrar salida sin haber ingresado antes.
+     *
+     * Devuelve true si NO existe ningún ingreso pendiente (es decir,
+     * no hay registro de entrada activo o nunca ingresó).
+     *
+     * @param string $chapa
+     * @return bool
+     */
+    public static function intentaSalirSinIngreso(string $chapa): bool
+    {
+        $vehiculo = Vehiculo::where('chapa', $chapa)->first();
+
+        // Si no existe el vehículo, entonces no pudo haber ingresado nunca.
+        if (!$vehiculo) {
+            return true; // intenta salir sin haber ingresado
+        }
+
+        // Buscamos si tiene un ingreso activo (sin salida registrada)
+        $tieneIngresoActivo = IngresoVehiculo::where('vehiculo_id', $vehiculo->id)
+            ->whereNull('fecha_hora_salida')
+            ->exists();
+
+        // Si NO tiene ingreso activo, entonces está intentando salir sin entrada
+        return !$tieneIngresoActivo;
     }
 }
