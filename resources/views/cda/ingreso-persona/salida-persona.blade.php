@@ -9,7 +9,7 @@
 {{-- Content body: main page content --}}
 
 @section('content_body')
-    HOLA DESDE PERSONA SALIDA
+    @livewire('cda.ingreso-persona.salida')
 @stop
 
 @push('css')
