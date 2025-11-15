@@ -61,17 +61,17 @@
                 </x-adminlte-input>
 
                 {{-- Pi Nombre Completo --}}
-                <x-adminlte-input name="pi_nombre_completo" wire:model.blur="pi_nombre_completo" label-class="text-lightblue"
-                    fgroup-class="col-md-3" igroup-size="sm" oninput="this.value = this.value.toUpperCase()"
-                    placeholder="EJ: JUAN PEREZ" :disabled="$bloqueoFormPerIngresa">
+                <x-adminlte-input name="pi_nombre_completo" wire:model.blur="pi_nombre_completo"
+                    label-class="text-lightblue" fgroup-class="col-md-3" igroup-size="sm"
+                    oninput="this.value = this.value.toUpperCase()" placeholder="EJ: JUAN PEREZ" :disabled="$bloqueoFormPerIngresa">
                     <x-slot name="prependSlot">
                         <div class="input-group-text">Nombre Completo *</div>
                     </x-slot>
                 </x-adminlte-input>
 
                 {{-- Personal Visitables --}}
-                <x-adminlte-select name="persona_visita_id" wire:model.blur="persona_visita_id" label-class="text-lightblue"
-                    fgroup-class="col-md-3" igroup-size="sm">
+                <x-adminlte-select name="persona_visita_id" wire:model.blur="persona_visita_id"
+                    label-class="text-lightblue" fgroup-class="col-md-3" igroup-size="sm">
                     <x-slot name="prependSlot">
                         <div class="input-group-text">Visita a *</div>
                     </x-slot>
@@ -82,8 +82,8 @@
                 </x-adminlte-select>
 
                 {{-- Lugar de Acceso --}}
-                <x-adminlte-select name="acceso_ingreso_id" wire:model.blur="acceso_ingreso_id" label-class="text-lightblue"
-                    fgroup-class="col-md-3" igroup-size="sm">
+                <x-adminlte-select name="acceso_ingreso_id" wire:model.blur="acceso_ingreso_id"
+                    label-class="text-lightblue" fgroup-class="col-md-3" igroup-size="sm">
                     <x-slot name="prependSlot">
                         <div class="input-group-text">Lugar de Acceso *</div>
                     </x-slot>
@@ -92,6 +92,18 @@
                         <option value="{{ $acceso->id }}">{{ $acceso->acceso ?? 'S/D' }}</option>
                     @endforeach
                 </x-adminlte-select>
+
+                {{-- Imagen --}}
+                {{-- <x-adminlte-input type="file" name="imagen" wire:model="imagen" label-class="text-lightblue"
+                    fgroup-class="col-md-12" igroup-size="sm">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text">Imagen *</div>
+                    </x-slot>
+                </x-adminlte-input>
+                @if ($imagen)
+                    <div class="img-thumbnail"><img src="{{ $imagen->temporaryUrl() }}" class=""></div>
+                @endif --}}
+
             </div>
 
             <x-slot name="footerSlot">

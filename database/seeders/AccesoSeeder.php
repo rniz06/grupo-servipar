@@ -13,9 +13,9 @@ class AccesoSeeder extends Seeder
      */
     public function run(): void
     {
-        Acceso::create(['acceso' => 'PRINCIPAL', 'empresa_id' => 1, 'sucursal_id' => 1, 'creado_por' => 1]);
+        Acceso::create(['acceso' => 'SIN DEFINIR', 'empresa_id' => 1, 'sucursal_id' => 1, 'creado_por' => 1]);
 
-        Acceso::create(['acceso' => 'SECUNDARIO', 'empresa_id' => 1, 'sucursal_id' => 1, 'creado_por' => 1]);
+        Acceso::create(['acceso' => 'PRINCIPAL', 'empresa_id' => 1, 'sucursal_id' => 1, 'creado_por' => 1]);
 
         Acceso::create(['acceso' => 'OTRO', 'empresa_id' => 1, 'sucursal_id' => 1, 'creado_por' => 1]);
     }

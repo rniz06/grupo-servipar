@@ -39,7 +39,7 @@
 
     <strong>
         <a href="{{ config('app.company_url', 'https://rubilock.com.py/') }}" class="text-dark">
-            {{ config('app.company_name', 'Desarrolado Por Rubilock') }}
+            {{ config('app.company_name', 'Desarrollado Por Rubilock') }}
         </a>
     </strong>
 @stop

@@ -29,6 +29,8 @@ class IngresoVehiculo extends Model implements Auditable
         'corresponde_salida',
         'empresa_id',
         'sucursal_id',
+        'img_entrada',
+        'img_salida',
         'creado_por',
         'actualizado_por'
     ];

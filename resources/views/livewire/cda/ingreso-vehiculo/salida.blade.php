@@ -59,13 +59,24 @@
                         <option value="{{ $acceso->id }}">{{ $acceso->acceso ?? 'S/D' }}</option>
                     @endforeach
                 </x-adminlte-select>
+
+                {{-- Imagen --}}
+                {{-- <x-adminlte-input type="file" name="imagen" wire:model.blur="imagen" label-class="text-lightblue"
+                    fgroup-class="col-md-12" igroup-size="sm">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text">Imagen *</div>
+                    </x-slot>
+                </x-adminlte-input>
+                @if ($imagen)
+                    <div class="img-thumbnail"><img src="{{ $imagen->temporaryUrl() }}" class=""></div>
+                @endif --}}
             </div>
 
             <x-slot name="footerSlot">
                 {{-- Botón para agregar más productos --}}
                 <x-adminlte-button label="Salir" theme="outline-secondary" icon="fas fa-arrow-left" class="btn-sm" />
                 {{-- Guardar --}}
-                <x-adminlte-button type="submit" label="Registrar Entrada" theme="outline-success" icon="fas fa-save"
+                <x-adminlte-button type="submit" label="Registrar Salida" theme="outline-success" icon="fas fa-save"
                     class="btn-sm float-right" />
             </x-slot>
 

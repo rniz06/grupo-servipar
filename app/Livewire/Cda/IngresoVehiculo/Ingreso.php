@@ -15,9 +15,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Ingreso extends Component
 {
+    use WithFileUploads;
+
     // Datos del ingreso
     public $vehiculo_id, $persona_ingresa_id, $persona_visita_id, $acceso_ingreso_id;
 
@@ -161,18 +164,20 @@ class Ingreso extends Component
                 'creado_por'      => Auth::id(),
             ])->id;
 
+            // $img = $this->imagen->store(path: "ingreso-vehiculos/ingreso/" . Carbon::now()->format('Y/m/d'));
+
             IngresoVehiculo::create([
                 'fecha_hora_ingreso'       => now(),
                 'vehiculo_id'              => $this->vehiculo_id,
                 'persona_ingresa_id'       => $this->persona_ingresa_id,
                 'persona_visita_id'        => $this->persona_visita_id,
                 'acceso_ingreso_id'        => $this->acceso_ingreso_id,
+                'img_entrada'                 => null,
                 'usuario_registro_ingreso' => Auth::id(),
                 'creado_por'               => Auth::id(),
             ]);
+
         });
-
-
 
         session()->flash('success', 'Ingreso registrado correctamente.');
         return redirect()->route('cda.panel-central.index');

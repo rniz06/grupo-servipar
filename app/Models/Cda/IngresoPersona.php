@@ -28,6 +28,7 @@ class IngresoPersona extends Model implements Auditable
         'corresponde_salida',
         'empresa_id',
         'sucursal_id',
+        'img_ruta',
         'creado_por',
         'actualizado_por'
     ];

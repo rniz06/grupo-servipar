@@ -22,5 +22,15 @@ class EmpresaSeeder extends Seeder
             'telefono' => '021 502 292',
             'creado_por' => 1 //ADMINISTRADOR
         ]);
+
+        Empresa::create([
+            'empresa' => 'HIPER. LUISITO',
+            'razon_social' => 'DIAZ E HIJOS S.A',
+            'ruc' => '80013876-7',
+            'correo' => 'contabilidad@luisito.com.py',
+            'direccion' => 'AVDA. EUSEBIO AYALA E/R.I. 3 CORRALES',
+            'telefono' => '522200',
+            'creado_por' => 1 //ADMINISTRADOR
+        ]);
     }
 }

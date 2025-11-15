@@ -12,13 +12,16 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Salida extends Component
 {
+    use WithFileUploads;
+
     public $registro;
 
     // Datos del ingreso
-    public $chapa, $acceso_salida_id;
+    public $chapa, $acceso_salida_id, $imagen;
 
     // Opciones para selects
     public $accesos;
@@ -71,13 +74,16 @@ class Salida extends Component
         
         $this->validate();
 
-        // AGREGAR Y FILTRAR SOLO POR LOS PENDIENTES DE SALIDA        
+        // AGREGAR Y FILTRAR SOLO POR LOS PENDIENTES DE SALIDA
         
+        // $img = $this->imagen->store(path: "ingreso-vehiculos/salida/" . Carbon::now()->format('Y/m/d'));
+
         $this->registro->update([
             'fecha_hora_salida'       => Carbon::now(),
             'acceso_salida_id'        => $this->acceso_salida_id,
             'usuario_registro_salida' => Auth::id(),
             'corresponde_salida'      => true,
+            'img_entrada'                => null,
             'actualizado_por'         => Auth::id(),
         ]);
 

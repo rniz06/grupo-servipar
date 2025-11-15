@@ -14,22 +14,12 @@ class PersonaSeeder extends Seeder
     public function run(): void
     {
         Persona::create([
-            'nombre_completo'   => 'JUAN PEREZ',
-            'nro_cedula'        => '1234567',
-            'nro_celular'       => '0984123123',
+            'nombre_completo'   => 'SIN DEFINIR',
+            'nro_cedula'        => '0',
+            'nro_celular'       => null,
             'esPersonalEmpresa' => false,
             'empresa_id'        => null,
             'sucursal_id'       => null,
-            'creado_por'        => 1 // ADMINISTRADOR
-        ]);
-
-        Persona::create([
-            'nombre_completo'   => 'RAMON DIAZ',
-            'nro_cedula'        => '7654321',
-            'nro_celular'       => '0984321321',
-            'esPersonalEmpresa' => true,
-            'empresa_id'        => 1,
-            'sucursal_id'       => 1,
             'creado_por'        => 1 // ADMINISTRADOR
         ]);
     }
