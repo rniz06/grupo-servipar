@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -22,12 +23,15 @@ class Ingreso extends Component
     use WithFileUploads;
 
     // Datos del ingreso
+    #[Validate]
     public $vehiculo_id, $persona_ingresa_id, $persona_visita_id, $acceso_ingreso_id;
 
     // Datos del vehículo
+    #[Validate]
     public $chapa, $marca_id, $modelo_id, $color_id;
 
     // Datos de la persona que ingresa
+    #[Validate]
     public $pi_nombre_completo, $pi_nro_cedula;
 
     // Opciones para selects
@@ -56,7 +60,7 @@ class Ingreso extends Component
             'marca_id'            => ['required', Rule::exists(Marca::class, 'id')],
             'modelo_id'           => ['required', Rule::exists(Modelo::class, 'id')],
             'color_id'            => ['required', Rule::exists(Color::class, 'id')],
-            'pi_nro_cedula'       => ['required', 'string', 'min:6', 'max:15'],
+            'pi_nro_cedula'       => ['required', 'string', 'min:1', 'max:15'],
             'pi_nombre_completo'  => ['required', 'string'],
             'persona_visita_id'   => ['required', Rule::exists(Persona::class, 'id')],
             'acceso_ingreso_id'   => ['required', Rule::exists(Acceso::class, 'id')],

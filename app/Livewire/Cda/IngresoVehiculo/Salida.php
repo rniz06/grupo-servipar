@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -21,6 +22,7 @@ class Salida extends Component
     public $registro;
 
     // Datos del ingreso
+    #[Validate]
     public $chapa, $acceso_salida_id, $imagen;
 
     // Opciones para selects

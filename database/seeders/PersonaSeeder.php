@@ -17,7 +17,7 @@ class PersonaSeeder extends Seeder
             'nombre_completo'   => 'SIN DEFINIR',
             'nro_cedula'        => '0',
             'nro_celular'       => null,
-            'esPersonalEmpresa' => false,
+            'esPersonalEmpresa' => true,
             'empresa_id'        => null,
             'sucursal_id'       => null,
             'creado_por'        => 1 // ADMINISTRADOR
