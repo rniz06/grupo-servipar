@@ -23,7 +23,7 @@ class RolYPermisoSeeder extends Seeder
         ]);
 
         SysModulo::create([
-            'modulo' => 'COMPRAS'
+            'modulo' => 'CONTROL DE ACCESO'
         ]);
 
         SysSubModulo::create([
@@ -37,24 +37,10 @@ class RolYPermisoSeeder extends Seeder
         ]);
 
         SysSubModulo::create([
-            'sub_modulo' => 'PEDIDOS',
+            'sub_modulo' => 'PANEL CENTRAL',
             'modulo_id' => 2
         ]);
 
-        SysSubModulo::create([
-            'sub_modulo' => 'PROVEEDORES',
-            'modulo_id' => 2
-        ]);
-
-        SysSubModulo::create([
-            'sub_modulo' => 'PRESUPUESTOS',
-            'modulo_id' => 2
-        ]);
-
-        SysSubModulo::create([
-            'sub_modulo' => 'COMPRAS',
-            'modulo_id' => 2
-        ]);
 
         $permisos = [
             // RUTAS DEL MODULO USUARIOS
@@ -77,24 +63,6 @@ class RolYPermisoSeeder extends Seeder
             ['permiso' => 'Roles Editar',            'modulo_id' => 1, 'sub_modulo_id' => 2],
             //['permiso' => 'Roles Exportar Excel',  'modulo_id' => 1, 'sub_modulo_id' => 2],
             //['permiso' => 'Roles Exportar Pdf',    'modulo_id' => 1, 'sub_modulo_id' => 2],
-
-            // RUTAS DEL MODULO PEDIDOS
-            ['permiso' => 'Pedidos Listar',              'modulo_id' => 2, 'sub_modulo_id' => 3],
-            ['permiso' => 'Pedidos Crear',               'modulo_id' => 2, 'sub_modulo_id' => 3],
-            ['permiso' => 'Pedidos Ver',                 'modulo_id' => 2, 'sub_modulo_id' => 3],
-            ['permiso' => 'Pedidos Crear Presupuesto',   'modulo_id' => 2, 'sub_modulo_id' => 3],
-            ['permiso' => 'Pedidos Aprobar Presupuesto', 'modulo_id' => 2, 'sub_modulo_id' => 3],
-            ['permiso' => 'Pedidos Cargar Factura',      'modulo_id' => 2, 'sub_modulo_id' => 3],
-            ['permiso' => 'Pedidos Rechazar',            'modulo_id' => 2, 'sub_modulo_id' => 3],
-            //['permiso' => 'Pedidos Exportar Excel',    'modulo_id' => 2, 'sub_modulo_id' => 3],
-            //['permiso' => 'Pedidos Exportar Pdf',      'modulo_id' => 2, 'sub_modulo_id' => 3],
-
-            // RUTAS DEL MODULO PROVEEDORES
-            ['permiso' => 'Proveedores Listar',            'modulo_id' => 2, 'sub_modulo_id' => 4],
-            ['permiso' => 'Proveedores Crear',             'modulo_id' => 2, 'sub_modulo_id' => 4],
-            ['permiso' => 'Proveedores Editar',            'modulo_id' => 2, 'sub_modulo_id' => 4],
-            //['permiso' => 'Proveedores Exportar Excel',    'modulo_id' => 2, 'sub_modulo_id' => 4],
-            //['permiso' => 'Proveedores Exportar Pdf',      'modulo_id' => 2, 'sub_modulo_id' => 4]
         ];
 
         foreach ($permisos as $permiso) {

@@ -14,7 +14,7 @@ class VehiculoSeeder extends Seeder
     public function run(): void
     {
         Vehiculo::create([
-            'chapa'      => 'ABCD123',
+            'chapa'      => '0',
             'marca_id'   => 1,
             'modelo_id'  => 1,
             'color_id'   => 1,

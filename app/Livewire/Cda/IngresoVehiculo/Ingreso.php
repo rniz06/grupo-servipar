@@ -4,6 +4,8 @@ namespace App\Livewire\Cda\IngresoVehiculo;
 
 use App\Models\Acceso;
 use App\Models\Cda\{Color, IngresoVehiculo, Marca, Modelo, Persona, Vehiculo};
+use App\Models\Empresa;
+use App\Models\Sucursal;
 use App\Services\Cda\Validaciones\IngresoVehiculoService;
 // use App\Models\Cda\IngresoVehiculo;
 // use App\Models\Cda\Marca;
@@ -23,8 +25,11 @@ class Ingreso extends Component
     use WithFileUploads;
 
     // Datos del ingreso
+    public $empresa_id  = 2, $sucursal_id = 2; // POR DEFECTO LUISITO
+
+    // Datos del ingreso
     #[Validate]
-    public $vehiculo_id, $persona_ingresa_id, $persona_visita_id, $acceso_ingreso_id;
+    public $vehiculo_id, $persona_ingresa_id, $persona_visita_id = 1, $acceso_ingreso_id = 1;
 
     // Datos del vehículo
     #[Validate]
@@ -35,7 +40,7 @@ class Ingreso extends Component
     public $pi_nombre_completo, $pi_nro_cedula;
 
     // Opciones para selects
-    public $marcas, $modelos, $colores, $personasVisitables, $accesos;
+    public $marcas, $modelos, $colores, $personasVisitables, $accesos, $empresas = [], $sucursales = [];
 
     // Bloqueos de formularios
     public $bloqueoFormVehiculo = true;
@@ -51,12 +56,15 @@ class Ingreso extends Component
             ->orderBy('nombre_completo')
             ->get(['id', 'nombre_completo']);
         $this->accesos = Acceso::orderBy('acceso')->get(['id', 'acceso']);
+
+        $this->empresas = Empresa::orderBy('empresa')->get(['id', 'empresa']);
+        $this->sucursales = Sucursal::where('empresa_id', $this->empresa_id)->orderBy('sucursal')->get(['id', 'sucursal']);
     }
 
     protected function rules()
     {
         return [
-            'chapa'               => ['required', 'string', 'min:6', 'max:10'],
+            'chapa'               => ['required', 'string', 'min:1', 'max:10'],
             'marca_id'            => ['required', Rule::exists(Marca::class, 'id')],
             'modelo_id'           => ['required', Rule::exists(Modelo::class, 'id')],
             'color_id'            => ['required', Rule::exists(Color::class, 'id')],
@@ -70,6 +78,11 @@ class Ingreso extends Component
     /** ─────────────────────────────────────────────
      *  Eventos de actualización
      * ────────────────────────────────────────────── */
+
+    public function updatedEmpresaId($value)
+    {
+        $this->sucursales = Sucursal::where('empresa_id', $value)->orderBy('sucursal')->get(['id', 'sucursal']);    
+    }
     public function updatedChapa($value)
     {
         $this->resetVehiculoForm();
@@ -176,7 +189,9 @@ class Ingreso extends Component
                 'persona_ingresa_id'       => $this->persona_ingresa_id,
                 'persona_visita_id'        => $this->persona_visita_id,
                 'acceso_ingreso_id'        => $this->acceso_ingreso_id,
-                'img_entrada'                 => null,
+                'empresa_id'               => $this->empresa_id,
+                'sucursal_id'              => $this->sucursal_id,
+                'img_entrada'              => null,
                 'usuario_registro_ingreso' => Auth::id(),
                 'creado_por'               => Auth::id(),
             ]);

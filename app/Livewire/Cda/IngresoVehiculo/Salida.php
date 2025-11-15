@@ -23,7 +23,7 @@ class Salida extends Component
 
     // Datos del ingreso
     #[Validate]
-    public $chapa, $acceso_salida_id, $imagen;
+    public $chapa, $acceso_salida_id = 1, $imagen;
 
     // Opciones para selects
     public $accesos;

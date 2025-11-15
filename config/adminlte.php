@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Grupo Sevipar',
+    'title' => 'Control de Acceso',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,13 +63,13 @@ return [
     |
     */
 
-    'logo' => '<b>Grupo</b>Sevipar',
+    'logo' => '<b>Control de </b>Acceso',
     //'logo_img' => 'img/logos/grupo-servipar.webp',
-    'logo_img' => 'img/logos/servipar-escudo.webp',
+    'logo_img' => 'img/logos/rubilock.webp',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'Grupo Servipar Logo',
+    'logo_img_alt' => 'Rubilock Logo',
 
     /*
     |--------------------------------------------------------------------------
@@ -87,7 +87,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'img/logos/grupo-servipar.webp',
+            'path' => 'img/logos/rubilock.webp',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
@@ -114,7 +114,7 @@ return [
         'enabled' => true,
         'mode' => 'fullscreen',
         'img' => [
-            'path' => 'img/logos/grupo-servipar.webp',
+            'path' => 'img/logos/rubilock.webp',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
             'width' => 60,
@@ -172,12 +172,12 @@ return [
     |
     */
 
-    'classes_auth_card' => 'card-outline card-success',
+    'classes_auth_card' => 'card-outline card-danger',
     'classes_auth_header' => '',
     'classes_auth_body' => '',
     'classes_auth_footer' => '',
     'classes_auth_icon' => '',
-    'classes_auth_btn' => 'btn-block btn-outline-success btn-sm',
+    'classes_auth_btn' => 'btn-block btn-outline-danger btn-sm',
     //'classes_auth_btn' => 'btn-flat btn-success'
 
     /*

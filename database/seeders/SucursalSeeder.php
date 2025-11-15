@@ -23,5 +23,16 @@ class SucursalSeeder extends Seeder
             'empresa_id' => 1,
             'creado_por' => 1 //ADMINISTRADOR
         ]);
+
+        Sucursal::create([
+            'sucursal' => 'CENTRO LOGISTICO',
+            'razon_social' => 'DIAZ E HIJOS S.A',
+            'ruc' => '80013876-7',
+            'correo' => 'contabilidad@luisito.com.py',
+            'direccion' => 'AVDA. EUSEBIO AYALA E/R.I. 3 CORRALES',
+            'telefono' => '522200',
+            'empresa_id' => 2, // HIPERMERCADO LUISITO
+            'creado_por' => 1 //ADMINISTRADOR
+        ]);
     }
 }

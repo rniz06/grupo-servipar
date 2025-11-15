@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 
 include_once __DIR__.'/admin.php'; // Incluir las rutas de admin
 include_once __DIR__.'/cda.php'; // Incluir las rutas de admin
-include_once __DIR__.'/compras.php'; // Incluir las rutas de compras
 
 Route::get('/', function () {
     return view('welcome');

@@ -3,6 +3,32 @@
         <x-adminlte-card theme="light" title="Datos de Ingreso" icon="fas fa-info" header-class="text-muted text-sm">
 
             <div class="col-md-12 row">
+                {{-- Empresa --}}
+                <x-adminlte-select name="empresa_id" wire:model.blur="empresa_id" label-class="text-lightblue"
+                    fgroup-class="col-md-3" igroup-size="sm">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text">Empresa *</div>
+                    </x-slot>
+                    <option value="">-- Seleccionar --</option>
+                    @foreach ($empresas as $empresa)
+                        <option value="{{ $empresa->id }}">{{ $empresa->empresa ?? 'S/D' }}</option>
+                    @endforeach
+                </x-adminlte-select>
+
+                {{-- Sucursal --}}
+                <x-adminlte-select name="sucursal_id" wire:model.blur="sucursal_id" label-class="text-lightblue"
+                    fgroup-class="col-md-3" igroup-size="sm">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text">Sucursal *</div>
+                    </x-slot>
+                    <option value="">-- Seleccionar --</option>
+                    @foreach ($sucursales as $sucursal)
+                        <option value="{{ $sucursal->id }}">{{ $sucursal->sucursal ?? 'S/D' }}</option>
+                    @endforeach
+                </x-adminlte-select>
+            </div>
+<hr>
+            <div class="col-md-12 row">
                 {{-- Vehiculo --}}
                 <x-adminlte-input name="chapa" wire:model.blur="chapa" label-class="text-lightblue"
                     fgroup-class="col-md-3" igroup-size="sm" oninput="this.value = this.value.toUpperCase()"
